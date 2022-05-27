@@ -26,8 +26,8 @@ class SearchViewModel(
     private val _searchTextState: MutableState<String> = mutableStateOf(value = "")
     val searchTextState: State<String> = _searchTextState
 
-    private val _searchLocations = MutableStateFlow<List<String>>(emptyList())
-    val searchLocations: StateFlow<List<String>> = _searchLocations.asStateFlow()
+    private val _searchLocations = MutableStateFlow<List<Travel>>(emptyList())
+    val searchLocations: StateFlow<List<Travel>> = _searchLocations.asStateFlow()
 
     private val _travelLocations = MutableStateFlow<List<Travel>>(emptyList())
     val travelLocation: StateFlow<List<Travel>> = _travelLocations.asStateFlow()
@@ -37,7 +37,7 @@ class SearchViewModel(
 
     init {
         getTravelLocations()
-        getSearchWord("양재")
+        getSearchLocations("양재")
         getAccommodations()
     }
 
@@ -47,9 +47,14 @@ class SearchViewModel(
 
     fun updateSearchText(newValue: String) {
         _searchTextState.value = newValue
+        viewModelScope.launch {
+            repository.getSearchWordList(newValue).collect {
+                _searchLocations.value = it
+            }
+        }
     }
 
-    private fun getSearchWord(searchWord: String) {
+    fun getSearchLocations(searchWord: String) {
         viewModelScope.launch {
             repository.getSearchWordList(searchWord).collect {
                 _searchLocations.value = it

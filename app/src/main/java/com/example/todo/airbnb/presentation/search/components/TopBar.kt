@@ -49,7 +49,7 @@ fun MainAppBar(
 
 
 @Composable
-fun DefaultAppBar(onSearchClicked: () -> Unit) {
+private fun DefaultAppBar(onSearchClicked: () -> Unit) {
     TopAppBar(
         modifier = Modifier.clickable { onSearchClicked() },
         backgroundColor = Gray,
@@ -67,7 +67,7 @@ fun DefaultAppBar(onSearchClicked: () -> Unit) {
 }
 
 @Composable
-fun SearchAppBar(
+private fun SearchAppBar(
     text: String,
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,

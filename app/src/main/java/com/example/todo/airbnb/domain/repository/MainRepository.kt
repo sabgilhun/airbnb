@@ -5,7 +5,7 @@ import com.example.todo.airbnb.data.Travel
 import kotlinx.coroutines.flow.Flow
 
 interface MainRepository {
-    fun getSearchWordList(searchWord: String): Flow<List<String>>
+    fun getSearchWordList(searchWord: String): Flow<List<Travel>>
 
     fun getTravelLocations(): Flow<List<Travel>>
 

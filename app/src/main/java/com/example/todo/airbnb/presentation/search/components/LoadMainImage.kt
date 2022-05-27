@@ -20,8 +20,9 @@ import coil.annotation.ExperimentalCoilApi
 import coil.compose.ImagePainter
 import coil.compose.rememberImagePainter
 import com.example.todo.airbnb.R
+import com.example.todo.airbnb.common.components.DefaultError
+import com.example.todo.airbnb.common.components.DefaultLoading
 
-@ExperimentalCoilApi
 @Composable
 fun LoadMainImage() {
     Box(
@@ -40,72 +41,50 @@ fun LoadMainImage() {
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.FillBounds
         )
-        if (painterState is ImagePainter.State.Loading) {
-            CircularProgressIndicator(
-                modifier = Modifier.align(Alignment.Center)
-            )
-        } else if (painterState is ImagePainter.State.Error) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_error),
-                contentDescription = "Error Image",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.FillBounds
-            )
-        } else if (painterState is ImagePainter.State.Success) {
-            Text(
-                text = "슬기로운\n자연생활",
-                modifier = Modifier
-                    .padding(start = 16.dp, bottom = 279.dp, top = 32.dp, end = 90.dp)
-                    .height(96.dp)
-                    .width(254.dp),
-                style = MaterialTheme.typography.h4,
-                lineHeight = 48.sp,
-                color = Color(0xff010101)
-            )
-            Text(
-                text = "에어비앤비가 엄선한\n위시리스트를 만나보세요",
-                modifier = Modifier
-                    .padding(start = 16.dp, bottom = 225.dp, top = 136.dp, end = 90.dp)
-                    .height(46.dp)
-                    .width(254.dp),
-                style = MaterialTheme.typography.body1,
-                lineHeight = 23.sp,
-                color = Color(0xff010101),
-            )
-            Box(
-                modifier = Modifier
-                    .padding(start = 16.dp, bottom = 165.dp, top = 206.dp, end = 90.dp)
-                    .clip(RoundedCornerShape(10.dp))
-                    .height(36.dp)
-                    .width(154.dp)
-                    .background(Color(0xff333333)),
-            ) {
+        when (painterState) {
+            is ImagePainter.State.Loading -> DefaultLoading()
+            is ImagePainter.State.Error -> DefaultError()
+            is ImagePainter.State.Success -> {
                 Text(
-                    text = "여행 아이디어 얻기",
-                    style = MaterialTheme.typography.button,
+                    text = "슬기로운\n자연생활",
                     modifier = Modifier
-                        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
-                        .height(20.dp)
-                        .width(122.dp),
-                    lineHeight = 20.sp,
-                    color = Color(0xffffffff),
+                        .padding(start = 16.dp, bottom = 279.dp, top = 32.dp, end = 90.dp)
+                        .height(96.dp)
+                        .width(254.dp),
+                    style = MaterialTheme.typography.h4,
+                    lineHeight = 48.sp,
+                    color = Color(0xff010101)
                 )
+                Text(
+                    text = "에어비앤비가 엄선한\n위시리스트를 만나보세요",
+                    modifier = Modifier
+                        .padding(start = 16.dp, bottom = 225.dp, top = 136.dp, end = 90.dp)
+                        .height(46.dp)
+                        .width(254.dp),
+                    style = MaterialTheme.typography.body1,
+                    lineHeight = 23.sp,
+                    color = Color(0xff010101),
+                )
+                Box(
+                    modifier = Modifier
+                        .padding(start = 16.dp, bottom = 165.dp, top = 206.dp, end = 90.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .height(36.dp)
+                        .width(154.dp)
+                        .background(Color(0xff333333)),
+                ) {
+                    Text(
+                        text = "여행 아이디어 얻기",
+                        style = MaterialTheme.typography.button,
+                        modifier = Modifier
+                            .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp)
+                            .height(20.dp)
+                            .width(122.dp),
+                        lineHeight = 20.sp,
+                        color = Color(0xffffffff),
+                    )
+                }
             }
         }
-    }
-}
-
-@ExperimentalCoilApi
-@Composable
-fun handleImage(painterState: ImagePainter.State) {
-    if (painterState is ImagePainter.State.Loading) {
-        CircularProgressIndicator()
-    } else if (painterState is ImagePainter.State.Error) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_error),
-            contentDescription = "Error Image",
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillBounds
-        )
     }
 }

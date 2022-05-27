@@ -1,6 +1,7 @@
 package com.example.todo.airbnb.presentation.search.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -10,23 +11,26 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.example.todo.airbnb.common.components.HandleImageResult
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 
-@ExperimentalCoilApi
 @Composable
 fun TravelScreen(viewModel: SearchViewModel) {
     val scrollState = rememberLazyListState()
     val travelLocations = viewModel.travelLocation.collectAsState().value
 
     Column(
-        modifier = Modifier.padding(start = 16.dp, end = 16.dp)
+        modifier = Modifier
+            .padding(start = 16.dp, end = 16.dp)
     ) {
         Text(
             modifier = Modifier
@@ -38,48 +42,51 @@ fun TravelScreen(viewModel: SearchViewModel) {
 
         LazyRow(state = scrollState) {
             itemsIndexed(travelLocations) { index, location ->
-                Column(modifier = Modifier.padding(end = 16.dp)) {
-                    if (index % 2 == 0) {
-                        Row {
-                            LoadImage(location)
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Column {
-                                Text(
-                                    text = location.name,
-                                    style = MaterialTheme.typography.h6
-                                )
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text(
-                                    text = location.time,
-                                    style = MaterialTheme.typography.body1
-                                )
-                            }
-                        }
-                        if (index + 1 < travelLocations.size) {
-                            Row {
-                                LoadImage(location)
-                                Spacer(modifier = Modifier.width(16.dp))
-                                Column {
-                                    Text(
-                                        text = travelLocations[index + 1].name,
-                                        style = MaterialTheme.typography.h6
-                                    )
-                                    Spacer(modifier = Modifier.width(4.dp))
-                                    Text(
-                                        text = travelLocations[index + 1].time,
-                                        style = MaterialTheme.typography.body1
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
+                MakeColumn(index, location, travelLocations)
             }
         }
     }
 }
 
-@ExperimentalCoilApi
+@Composable
+private fun MakeColumn(
+    index: Int,
+    location: Travel,
+    travelLocations: List<Travel>,
+) {
+    Column(modifier = Modifier.padding(end = 16.dp)) {
+        if (index % 2 == 0) {
+            Row { MakeItem(location) }
+            if (index + 1 < travelLocations.size) {
+                Row { MakeItem(travelLocations[index + 1]) }
+            }
+        }
+    }
+}
+
+@Composable
+fun MakeItem(location: Travel) {
+    LoadImage(location)
+    Spacer(modifier = Modifier.width(16.dp))
+    Column(
+        verticalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .height(70.dp)
+    ) {
+        Text(
+            text = location.name,
+            style = MaterialTheme.typography.h6
+        )
+        Spacer(modifier = Modifier.width(4.dp))
+        if (location.time != null) {
+            Text(
+                text = location.time,
+                style = MaterialTheme.typography.body1
+            )
+        }
+    }
+}
+
 @Composable
 private fun LoadImage(travel: Travel) {
     val painter = rememberImagePainter(
@@ -94,6 +101,5 @@ private fun LoadImage(travel: Travel) {
             .height(70.dp),
         contentScale = ContentScale.FillBounds
     )
-    val painterState = painter.state
-    handleImage(painterState)
+    HandleImageResult(painterState = painter.state)
 }
