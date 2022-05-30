@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -18,7 +19,6 @@ public class User {
 
     @Id
     @GeneratedValue
-    @Column(name = "user_id")
     private Long id;
 
     @Column(nullable = false)

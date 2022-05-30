@@ -1,28 +1,31 @@
 package team18.airbnb.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccommodationInfo {
 
-    @Id @GeneratedValue
-    @Column(name = "accommdationInfo_id")
+    @Id
+    @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodation_id")
+    @OneToOne(mappedBy = "accommodationInfo", fetch = FetchType.LAZY)
     private Accommodation accommodation;
 
     private String description;
-
-    @Enumerated(EnumType.STRING)
-    private AccommodationType type;
 
     private int numberOfBed;
     private int numberOfBath;

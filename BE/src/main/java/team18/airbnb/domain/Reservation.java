@@ -21,16 +21,15 @@ public class Reservation {
 
     @Id
     @GeneratedValue
-    @Column(name = "reservation_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usee_id")
-    private User userId;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodationId_id")
-    private Accommodation accommodationId;
+    @JoinColumn(name = "accommodation_id")
+    private Accommodation accommodation;
 
     @Column(nullable = false)
     private LocalDateTime checkOut;

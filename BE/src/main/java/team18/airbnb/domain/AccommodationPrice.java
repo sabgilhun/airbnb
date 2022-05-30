@@ -1,22 +1,26 @@
 package team18.airbnb.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccommodationPrice {
 
-    @Id @GeneratedValue
-    @Column(name = "accommdationPrice_id")
+    @Id
+    @GeneratedValue
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodation_id")
+    @OneToOne(mappedBy = "accommodationPrice", fetch = FetchType.LAZY)
     private Accommodation accommodation;
 
     private int roomCharge;
