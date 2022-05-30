@@ -1,0 +1,8 @@
+insert into region(distance, region_img, region_name) values ('차로 30분거리', '서울이미지', '서울');
+insert into region(distance, region_img, region_name) values ('차로 4시간거리', '광주이미지', '광주');
+insert into region(distance, region_img, region_name) values ('차로 30분거리', '의정부이미지', '의정부');
+insert into region(distance, region_img, region_name) values ('차로 45분거리', '수원이미지', '수원');
+insert into region(distance, region_img, region_name) values ('차로 3.5시간거리', '이미지', '대구');
+insert into region(distance, region_img, region_name) values ('차로 4.5시간시간거리', '대구이미지', '울산');
+insert into region(distance, region_img, region_name) values ('차로 2시간거리', '대전이미지', '대전');
+insert into region(distance, region_img, region_name) values ('차로 30분거리', '부천이미지', '부천');
