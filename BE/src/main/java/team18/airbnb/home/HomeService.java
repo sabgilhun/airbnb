@@ -1,15 +1,17 @@
 package team18.airbnb.home;
 
-import lombok.RequiredArgsConstructor;
-import team18.airbnb.domain.Accommodation;
-import team18.airbnb.domain.Region;
-import team18.airbnb.home.dto.AccommodationByConceptDto;
-import team18.airbnb.home.dto.LookAroundRegionDto;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.RequiredArgsConstructor;
+import team18.airbnb.domain.Region;
+import team18.airbnb.home.dto.AccommodationByConceptDto;
+import team18.airbnb.home.dto.LookAroundRegionDto;
+
+@Service
 @RequiredArgsConstructor
 public class HomeService {
 
