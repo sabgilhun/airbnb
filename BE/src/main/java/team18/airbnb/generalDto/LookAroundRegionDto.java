@@ -1,4 +1,4 @@
-package team18.airbnb.home.dto;
+package team18.airbnb.generalDto;
 
 import lombok.Getter;
 import team18.airbnb.domain.Region;

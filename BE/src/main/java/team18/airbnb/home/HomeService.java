@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import team18.airbnb.domain.Region;
 import team18.airbnb.home.dto.AccommodationByConceptDto;
-import team18.airbnb.home.dto.LookAroundRegionDto;
+import team18.airbnb.generalDto.LookAroundRegionDto;
 
 @Service
 @RequiredArgsConstructor
@@ -32,12 +32,12 @@ public class HomeService {
         return accommodations;
     }
 
-    public List<LookAroundRegionDto> createRegion() {
-        List<Region> allRegion = homeRepository.findAll();
+        public List<LookAroundRegionDto> createRegion(int regionCount) {
+            List<Region> allRegion = homeRepository.findAll();
 
-        return allRegion.stream()
-                .limit(4)
-                .map(LookAroundRegionDto::new)
+            return allRegion.stream()
+                    .limit(regionCount)
+                    .map(LookAroundRegionDto::new)
                 .collect(Collectors.toList());
     }
 }
