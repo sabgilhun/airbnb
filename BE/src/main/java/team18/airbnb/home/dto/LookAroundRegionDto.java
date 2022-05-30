@@ -12,7 +12,7 @@ public class LookAroundRegionDto {
 
     public LookAroundRegionDto(Region region) {
         this.regionName = region.getRegionName();
-        this.regionImg = region.getRegionName();
+        this.regionImg = region.getRegionImg();
         this.distance = region.getDistance();
     }
 }

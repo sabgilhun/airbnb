@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -20,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class Reservation {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,8 +34,10 @@ public class Reservation {
 
     @Column(nullable = false)
     private LocalDateTime checkOut;
+
     @Column(nullable = false)
     private LocalDateTime checkIn;
+
     @Column(nullable = false)
     private int numberOfGuests;
 }
