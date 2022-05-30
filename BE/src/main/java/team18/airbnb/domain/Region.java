@@ -17,5 +17,7 @@ public class Region {
     @GeneratedValue
     private Long id;
 
+    private String regionImg;
     private String regionName;
+    private String distance; // DB 자체에 일단 고정 값 추가
 }
