@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search.components.personnel
+package com.example.todo.airbnb.presentation.search.serachcondition
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -7,9 +7,8 @@ import androidx.navigation.NavController
 import com.example.todo.airbnb.presentation.main.components.Destinations
 
 @Composable
-fun PersonnelScreen(navController: NavController) {
-
-    Button(onClick = { navController.navigate(Destinations.searchResult) }) {
-        Text(text = "Personnel")
+fun SearchConditionScreen(navController: NavController) {
+    Button(onClick = { navController.navigate(Destinations.detail) }) {
+        Text(text = "SearchMap")
     }
 }

@@ -19,13 +19,13 @@ import com.example.todo.airbnb.R
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.presentation.reservation.components.ReservationScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
-import com.example.todo.airbnb.presentation.search.components.date.DateScreen
-import com.example.todo.airbnb.presentation.search.components.detail.DetailScreen
-import com.example.todo.airbnb.presentation.search.components.fare.FareScreen
-import com.example.todo.airbnb.presentation.search.components.personnel.PersonnelScreen
-import com.example.todo.airbnb.presentation.search.components.searchmap.SearchMapScreen
-import com.example.todo.airbnb.presentation.search.components.searchresult.SearchResultScreen
-import com.example.todo.airbnb.presentation.search.components.serachcondition.SearchConditionScreen
+import com.example.todo.airbnb.presentation.search.date.DateScreen
+import com.example.todo.airbnb.presentation.search.detail.DetailScreen
+import com.example.todo.airbnb.presentation.search.fare.FareScreen
+import com.example.todo.airbnb.presentation.search.personnel.PersonnelScreen
+import com.example.todo.airbnb.presentation.search.searchmap.SearchMapScreen
+import com.example.todo.airbnb.presentation.search.searchresult.SearchResultScreen
+import com.example.todo.airbnb.presentation.search.serachcondition.SearchConditionScreen
 import com.example.todo.airbnb.presentation.wishlist.components.WishListScreen
 import com.example.todo.airbnb.ui.theme.Gray
 

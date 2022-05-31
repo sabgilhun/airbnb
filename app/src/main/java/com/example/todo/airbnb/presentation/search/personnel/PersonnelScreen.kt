@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search.components.fare
+package com.example.todo.airbnb.presentation.search.personnel
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -7,8 +7,9 @@ import androidx.navigation.NavController
 import com.example.todo.airbnb.presentation.main.components.Destinations
 
 @Composable
-fun FareScreen(navController: NavController) {
-    Button(onClick = { navController.navigate(Destinations.personnel) }) {
-        Text(text = "Fare")
+fun PersonnelScreen(navController: NavController) {
+
+    Button(onClick = { navController.navigate(Destinations.searchResult) }) {
+        Text(text = "Personnel")
     }
 }

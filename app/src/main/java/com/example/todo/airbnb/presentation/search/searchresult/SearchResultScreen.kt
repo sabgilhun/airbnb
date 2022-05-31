@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search.components.serachcondition
+package com.example.todo.airbnb.presentation.search.searchresult
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -7,8 +7,8 @@ import androidx.navigation.NavController
 import com.example.todo.airbnb.presentation.main.components.Destinations
 
 @Composable
-fun SearchConditionScreen(navController: NavController) {
-    Button(onClick = { navController.navigate(Destinations.detail) }) {
-        Text(text = "SearchMap")
+fun SearchResultScreen(navController: NavController) {
+    Button(onClick = { navController.navigate(Destinations.searchMap) }) {
+        Text(text = "SearchResult")
     }
 }
