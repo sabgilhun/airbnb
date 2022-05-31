@@ -1,10 +1,8 @@
 package com.example.todo.airbnb.presentation.main.components
 
-import SearchScreen
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
@@ -22,6 +20,7 @@ import com.example.todo.airbnb.R
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.presentation.reservation.components.ReservationScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
+import com.example.todo.airbnb.presentation.search.components.SearchScreen
 import com.example.todo.airbnb.presentation.search.date.DateScreen
 import com.example.todo.airbnb.presentation.search.detail.DetailScreen
 import com.example.todo.airbnb.presentation.search.fare.FareScreen
@@ -83,6 +82,8 @@ fun BottomBar(
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+@ExperimentalMaterialApi
 @Composable
 fun BottomNavGraph(navController: NavHostController, viewModel: SearchViewModel) {
     NavHost(
@@ -96,6 +97,8 @@ fun BottomNavGraph(navController: NavHostController, viewModel: SearchViewModel)
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+@ExperimentalMaterialApi
 private fun NavGraphBuilder.airbnbNavGraph(
     navController: NavController,
     viewModel: SearchViewModel,
@@ -110,7 +113,7 @@ private fun NavGraphBuilder.airbnbNavGraph(
 
     }
     composable(route = Destinations.calendar) { DateScreen(navController = navController) }
-    composable(route = Destinations.fare) { FareScreen(navController = navController) }
+    composable(route = Destinations.fare) { FareScreen(navController = navController, viewModel) }
     composable(route = Destinations.personnel) { PersonnelScreen(navController = navController) }
     composable(route = Destinations.searchResult) { SearchResultScreen(navController = navController) }
     composable(route = Destinations.searchMap) { SearchMapScreen(navController = navController) }

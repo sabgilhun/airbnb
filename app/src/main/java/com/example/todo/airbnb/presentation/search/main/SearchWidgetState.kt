@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search
+package com.example.todo.airbnb.presentation.search.main
 
 sealed class SearchWidgetState {
     object OPEN : SearchWidgetState()

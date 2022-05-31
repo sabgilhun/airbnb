@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import com.example.todo.airbnb.presentation.main.components.MainScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.ui.theme.AirbnbTheme
 
+@ExperimentalMaterialApi
 class MainActivity : ComponentActivity() {
 
     private val viewModel: SearchViewModel by viewModels()
@@ -26,6 +28,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalMaterialApi
 @Composable
 fun AirbnbTheme(viewModel: SearchViewModel) {
     AirbnbTheme {
@@ -38,6 +41,7 @@ fun AirbnbTheme(viewModel: SearchViewModel) {
     }
 }
 
+@ExperimentalMaterialApi
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

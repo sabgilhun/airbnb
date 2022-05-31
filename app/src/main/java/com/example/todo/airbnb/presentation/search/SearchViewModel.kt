@@ -9,6 +9,7 @@ import com.example.todo.airbnb.data.Accommodations
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.data.repository.MainRepositoryImpl
 import com.example.todo.airbnb.domain.repository.MainRepository
+import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
