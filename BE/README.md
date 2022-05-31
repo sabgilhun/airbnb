@@ -94,5 +94,27 @@
     하지만,
 ```
 
-- `User`와 `Review`는 양방향 매핑이 필요가 없는건가?
-  - 
+### `ERD 다이어그램 작성 (초안)`
+### 💡 Issue
+- [x] AWS 인프라 구상도 작성 (draw.io tool 사용)
+- [x] Airbnb 프로젝트에서 사용할 VPC 사설 네트워크 망 생성
+- [x] Public 서브넷 1개, Private 서브넷 2개 생성
+- [x] 인터넷과의 통신을 위한 인터넷 게이트웨이 생성 후 VPC 에 연결
+- [x] 각 서브넷에 연결할 라우팅 테이블 3개 생성 후 각 서브넷과 연결
+- [x] NAT 인스턴스, Bastion 인스턴스, WEB Server 인스턴스, WAS 인스턴스, MySQL 인스턴스 생성
+- [x] 각 인스턴스 보안그룹을 따로 생성해서 인바운드 규칙 추가
+- [x] Bastion 인스턴스를 통해 Private 서브넷에 접근하기 위해 ssh-agent 를 사용해 Private Key 를 메모리에 캐싱
+- [x] 캐싱된 Private Key 를 가지고 Bastion 인스턴스에서 Private 서브넷 접속 테스트
+- [x] README 파일에 업로드 예정
+
+### ✏️ AWS 인프라 구상도
+![Airbnb docker 전 최종 인프라 drawio](https://user-images.githubusercontent.com/79444040/170923420-e29e2fc8-faf6-41b6-bee6-d96fab02d911.png)
+
+### 🚧 접속 Test
+- [x] Bastion Instance 접속 성공
+  <img width="653" alt="스크린샷 2022-05-30 오후 2 37 33" src="https://user-images.githubusercontent.com/79444040/170924030-914e247d-4cc7-4eb0-8013-61df9cd45b07.png">
+
+- [x] Bastion Instance 접속 후 Private 서브넷 접속 성공
+  <img width="601" alt="스크린샷 2022-05-30 오후 2 39 08" src="https://user-images.githubusercontent.com/79444040/170924303-202aa9bc-4aca-454a-94f7-8fe8764de606.png">
+
+
