@@ -1,6 +1,7 @@
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -17,7 +18,10 @@ import com.example.todo.airbnb.presentation.main.components.MainAppBar
 import com.example.todo.airbnb.presentation.main.components.navigateToCalendar
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.SearchWidgetState
-import com.example.todo.airbnb.presentation.search.components.*
+import com.example.todo.airbnb.presentation.search.components.AccommodationsScreen
+import com.example.todo.airbnb.presentation.search.components.LoadMainImage
+import com.example.todo.airbnb.presentation.search.components.MakeItem
+import com.example.todo.airbnb.presentation.search.components.TravelScreen
 
 @Composable
 fun SearchScreen(viewModel: SearchViewModel, navController: NavController) {
