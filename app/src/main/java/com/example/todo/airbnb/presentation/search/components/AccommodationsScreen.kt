@@ -1,6 +1,5 @@
 package com.example.todo.airbnb.presentation.search.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
@@ -16,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
+import com.example.todo.airbnb.common.components.HandleImageResult
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 
 @Composable
@@ -34,11 +33,9 @@ fun SubTitle2() {
     )
 }
 
-@ExperimentalCoilApi
 @Composable
 fun AccommodationsScreen(viewModel: SearchViewModel) {
     val accommodations = viewModel.accommodations.collectAsState().value
-    Log.d("TAG", "$accommodations")
     Column(
         modifier = Modifier.padding(start = 16.dp, end = 16.dp)
     ) {
@@ -57,7 +54,6 @@ fun AccommodationsScreen(viewModel: SearchViewModel) {
     }
 }
 
-@ExperimentalCoilApi
 @Composable
 private fun LoadImage(imgUrl: String) {
     val painter = rememberImagePainter(
@@ -72,6 +68,5 @@ private fun LoadImage(imgUrl: String) {
             .height(294.dp),
         contentScale = ContentScale.FillBounds
     )
-    val painterState = painter.state
-    handleImage(painterState)
+    HandleImageResult(painterState = painter.state)
 }

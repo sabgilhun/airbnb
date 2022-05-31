@@ -6,22 +6,22 @@ import com.example.todo.airbnb.domain.repository.MainRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class MainRepositoryImpl: MainRepository {
-
-    private val locations = listOf(
-        "양재동, 서초구, 서울특별시",
-        "양재역 사거리, 양재1동",
-        "서울특별시 양재2동 시민의숲앞",
-        "서울특별시 양재2동 양재 IC",
-        "강릉시, 강원도",
-        "대전광역시 서구",
-        "대전광역시 중구",
-        "대전광역시 동구",
-        "경기도 수원시"
-    )
+class MainRepositoryImpl : MainRepository {
 
     private val dummyImage =
         "https://a0.muscache.com/im/pictures/2f13349d-879d-43c6-83e3-8e5679291d53.jpg?im_w=480"
+
+    private val locations = listOf(
+        Travel(dummyImage, "양재동, 서초구, 서울특별시"),
+        Travel(dummyImage, "양재역 사거리, 양재1동"),
+        Travel(dummyImage, "서울특별시 양재2동 시민의숲앞"),
+        Travel(dummyImage, "서울특별시 양재2동 양재 IC"),
+        Travel(dummyImage, "강릉시, 강원도"),
+        Travel(dummyImage, "대전광역시 서구"),
+        Travel(dummyImage, "대전광역시 중구"),
+        Travel(dummyImage, "대전광역시 동구"),
+        Travel(dummyImage, "경기도 수원시")
+    )
 
     private val travelList = listOf(
         Travel(dummyImage, "서울", "차로 30분 거리"),
@@ -45,8 +45,10 @@ class MainRepositoryImpl: MainRepository {
         Accommodations(dummyImage, "독특한 공간")
     )
 
-    override fun getSearchWordList(searchWord: String): Flow<List<String>> = flow {
-        val searchList = locations.filter { it.contains(searchWord) }
+    override fun getSearchWordList(searchWord: String): Flow<List<Travel>> = flow {
+        val searchList = locations.filter {
+            it.name.contains(searchWord)
+        }
         emit(searchList)
     }
 
