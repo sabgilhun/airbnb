@@ -14,15 +14,14 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.presentation.main.components.MainAppBar
+import com.example.todo.airbnb.presentation.main.components.navigateToCalendar
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.SearchWidgetState
 import com.example.todo.airbnb.presentation.search.components.*
-import com.example.todo.airbnb.presentation.search.components.navigation.SearchNavGraph
-import com.example.todo.airbnb.presentation.search.components.navigation.SearchScreens
 
 @Composable
-fun SearchScreen(viewModel: SearchViewModel) {
-    SearchNavGraph(viewModel)
+fun SearchScreen(viewModel: SearchViewModel, navController: NavController) {
+    SearchMainScreen(navController, viewModel)
 }
 
 @Composable
@@ -84,7 +83,10 @@ private fun SearchList(navController: NavController, travelLocations: List<Trave
             items(travelLocations) { location ->
                 Row(
                     modifier = Modifier
-                        .clickable { navController.navigate(SearchScreens.Date.route) }
+                        .clickable {
+                            val backStackEntry = requireNotNull(navController.currentBackStackEntry)
+                            navigateToCalendar(location, navController, backStackEntry)
+                        }
                         .fillMaxWidth()
                 ) { MakeItem(location = location) }
                 Spacer(modifier = Modifier.height(16.dp))

@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search.components.date
+package com.example.todo.airbnb.presentation.search.components.fare
 
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -7,11 +7,8 @@ import androidx.navigation.NavController
 import com.example.todo.airbnb.presentation.main.components.Destinations
 
 @Composable
-fun DateScreen(navController: NavController) {
-    Button(
-        onClick = { navController.navigate(Destinations.fare) }
-    ) {
-        Text(text = "Calender")
+fun FareScreen(navController: NavController) {
+    Button(onClick = { navController.navigate(Destinations.personnel) }) {
+        Text(text = "Fare")
     }
-
 }
