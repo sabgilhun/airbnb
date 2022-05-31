@@ -27,7 +27,7 @@ fun MainAppBar(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit,
     onOpenTriggered: () -> Unit,
-    onCloseTriggered: () -> Unit
+    onCloseTriggered: () -> Unit,
 ) {
     when (searchWidgetState) {
         SearchWidgetState.CLOSED -> {
@@ -62,7 +62,8 @@ private fun DefaultAppBar(onSearchClicked: () -> Unit) {
                     tint = Color.Red
                 )
             }
-        }
+        },
+        elevation = 0.dp
     )
 }
 
@@ -72,13 +73,13 @@ private fun SearchAppBar(
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit,
-    onCloseTriggered: () -> Unit
+    onCloseTriggered: () -> Unit,
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .height(56.dp),
-        elevation = AppBarDefaults.TopAppBarElevation,
+        elevation = 0.dp,
         color = Gray
     ) {
         TextField(
