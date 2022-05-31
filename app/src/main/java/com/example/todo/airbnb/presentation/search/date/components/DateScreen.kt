@@ -14,8 +14,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.todo.airbnb.data.datasource.CalendarYear
+import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.presentation.main.components.Destinations
-import com.example.todo.airbnb.presentation.search.components.common.bottomScreen
+import com.example.todo.airbnb.presentation.search.SearchViewModel
+import com.example.todo.airbnb.presentation.search.components.common.BottomScreen
 import com.example.todo.airbnb.presentation.search.date.components.Calendar
 import com.example.todo.airbnb.presentation.search.date.components.CalendarDay
 import com.example.todo.airbnb.presentation.search.date.components.CalendarMonth
@@ -24,11 +26,12 @@ import com.example.todo.airbnb.ui.theme.Gray
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun DateScreen(navController: NavController) {
+fun DateScreen(navController: NavController, viewModel: SearchViewModel) {
     val dateViewModel: DateViewModel = viewModel()
     val calendarYear = dateViewModel.calendarYear
 
     CalendarContent(
+        viewModel = viewModel,
         navController = navController,
         selectedDates = dateViewModel.datesSelected.toString(),
         calendarYear = calendarYear,
@@ -43,6 +46,7 @@ fun DateScreen(navController: NavController) {
 
 @Composable
 fun CalendarContent(
+    viewModel: SearchViewModel,
     navController: NavController,
     selectedDates: String,
     calendarYear: CalendarYear,
@@ -52,10 +56,10 @@ fun CalendarContent(
     Scaffold(
         backgroundColor = Color.White,
         topBar = {
-            CalendarTopAppBar(navController, selectedDates)
+            CalendarTopAppBar(navController, selectedDates, viewModel)
         },
         bottomBar = {
-            bottomScreen(
+            BottomScreen(
                 selectedDates,
                 onRemove = { onClear() },
                 onSkip = { navController.navigate(Destinations.fare) }
@@ -70,6 +74,7 @@ fun CalendarContent(
 fun CalendarTopAppBar(
     navController: NavController,
     selectedDates: String,
+    viewModel: SearchViewModel,
 ) {
     Surface(
         modifier = Modifier
@@ -96,7 +101,14 @@ fun CalendarTopAppBar(
                     )
                 }
                 IconButton(onClick = {
-                    if (selectedDates.isNotEmpty()) navController.navigate(Destinations.fare)
+                    if (selectedDates.isNotEmpty()) {
+                        val split = selectedDates.split(" - ")
+                        if (split.size > 1) viewModel.addReservation(
+                            Search(split[0], split[1], null)
+                        )
+                        else viewModel.addReservation(Search(split[0], split[0], null))
+                        navController.navigate(Destinations.fare)
+                    }
                 }) {
                     Icon(
                         imageVector = Icons.Default.Check,

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.todo.airbnb.data.Accommodations
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.data.repository.MainRepositoryImpl
+import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.domain.repository.MainRepository
 import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,10 +37,17 @@ class SearchViewModel(
     private val _accommodations = MutableStateFlow<List<Accommodations>>(emptyList())
     val accommodations: StateFlow<List<Accommodations>> = _accommodations.asStateFlow()
 
+    private var _search: MutableState<Search?> = mutableStateOf(null)
+    val search: State<Search?> = _search
+
     init {
         getTravelLocations()
         getSearchLocations("양재")
         getAccommodations()
+    }
+
+    fun addReservation(newSearch: Search) {
+        _search.value = newSearch
     }
 
     fun updateSearchWidgetState(newValue: SearchWidgetState) {

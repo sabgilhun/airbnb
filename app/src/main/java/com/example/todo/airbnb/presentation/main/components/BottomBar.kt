@@ -7,8 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -17,13 +15,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import com.example.todo.airbnb.R
-import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.presentation.reservation.components.ReservationScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.components.SearchScreen
 import com.example.todo.airbnb.presentation.search.date.DateScreen
 import com.example.todo.airbnb.presentation.search.detail.DetailScreen
-import com.example.todo.airbnb.presentation.search.fare.FareScreen
+import com.example.todo.airbnb.presentation.search.fare.components.FareScreen
 import com.example.todo.airbnb.presentation.search.personnel.PersonnelScreen
 import com.example.todo.airbnb.presentation.search.searchmap.SearchMapScreen
 import com.example.todo.airbnb.presentation.search.searchresult.SearchResultScreen
@@ -110,21 +107,19 @@ private fun NavGraphBuilder.airbnbNavGraph(
         composable(HomeSections.Search.route) { SearchScreen(viewModel, navController) }
         composable(HomeSections.WishList.route) { WishListScreen() }
         composable(HomeSections.Reservation.route) { ReservationScreen() }
-
     }
-    composable(route = Destinations.calendar) { DateScreen(navController = navController) }
+
+    composable(route = Destinations.calendar) {
+        DateScreen(navController = navController, viewModel)
+    }
     composable(route = Destinations.fare) { FareScreen(navController = navController, viewModel) }
-    composable(route = Destinations.personnel) { PersonnelScreen(navController = navController) }
+    composable(route = Destinations.personnel) {
+        PersonnelScreen(navController = navController, viewModel)
+    }
     composable(route = Destinations.searchResult) { SearchResultScreen(navController = navController) }
     composable(route = Destinations.searchMap) { SearchMapScreen(navController = navController) }
     composable(route = Destinations.searchCondition) { SearchConditionScreen(navController = navController) }
     composable(route = Destinations.detail) { DetailScreen(navController = navController) }
-}
-
-fun navigateToCalendar(location: Travel, navController: NavController, from: NavBackStackEntry) {
-    if (from.lifecycle.currentState == Lifecycle.State.RESUMED) {
-        navController.navigate(Destinations.calendar)
-    }
 }
 
 private fun selectNavigation(

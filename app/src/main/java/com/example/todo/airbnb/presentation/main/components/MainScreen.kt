@@ -20,7 +20,6 @@ fun MainScreen(viewModel: SearchViewModel) {
     val shouldShowBottomBar: Boolean =
         (navController.currentBackStackEntryAsState().value?.destination?.route in bottomBarRoutes) or (navController.currentBackStackEntryAsState().value?.destination?.route == Destinations.searchResult)
 
-
     Scaffold(
         bottomBar = {
             if (shouldShowBottomBar) {

@@ -1,13 +1,14 @@
-package com.example.todo.airbnb.presentation.search.fare
+package com.example.todo.airbnb.presentation.search.fare.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.runtime.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.RangeSlider
+import androidx.compose.material.SliderDefaults
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -15,80 +16,37 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.util.toRange
-import androidx.navigation.NavController
-import com.example.todo.airbnb.presentation.main.components.Destinations
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import java.text.DecimalFormat
 
 @ExperimentalMaterialApi
 @Composable
-fun FareScreen(navController: NavController, viewModel: SearchViewModel) {
-    FareEnroll(navController, viewModel)
-}
-
-
-@ExperimentalMaterialApi
-@Composable
-fun FareEnroll(navController: NavController, viewModel: SearchViewModel) {
-
-    var sliderPosition by remember { mutableStateOf(0.01f..1f) }
-
-    val lowerThumb = sliderPosition.toRange().lower
-    val upperThumb = sliderPosition.toRange().upper
-
-
-
-    Scaffold(
-        backgroundColor = Color.White,
-        topBar = {
-            FareTopAppBar(
-                navController = navController,
-                lowerThumb = lowerThumb,
-                upperThumb = upperThumb
-            )
-        },
-        bottomBar = {
-            BottomBar()
-        }
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.width(350.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Graph(
-                    viewModel = viewModel,
-                    lowerThumb = lowerThumb,
-                    upperThumb = upperThumb,
-                    sliderPosition = sliderPosition,
-                    setValue = { sliderPosition = it }
-                )
-                LowestFare(lowerThumb)
-                HighestFare(upperThumb)
-            }
-        }
-    }
-}
-
-@Composable
-private fun BottomBar() {
-    BottomAppBar(
+internal fun Fare(
+    viewModel: SearchViewModel,
+    lowerThumb: Float,
+    upperThumb: Float,
+    sliderPosition: ClosedFloatingPointRange<Float>,
+    setValue: (ClosedFloatingPointRange<Float>) -> Unit,
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp)
-            .background(Color(0xffF5F5F7)),
-
+    ) {
+        Column(
+            modifier = Modifier.width(350.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-        Text(
-            text = "건너뛰기",
-            fontSize = 16.sp,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
+            Graph(
+                viewModel = viewModel,
+                lowerThumb = lowerThumb,
+                upperThumb = upperThumb,
+                sliderPosition = sliderPosition,
+                setValue = { setValue(it) }
+            )
+            LowestFare(lowerThumb)
+            HighestFare(upperThumb)
+        }
     }
 }
 
@@ -150,47 +108,6 @@ private fun LowestFare(lowerThumb: Float) {
     }
 }
 
-@Composable
-private fun FareTopAppBar(
-    navController: NavController,
-    lowerThumb: Float,
-    upperThumb: Float
-) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(120.dp)
-            .background(Color(0xffF5F5F7)),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            IconButton(
-                onClick = { navController.navigateUp() }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "Back Icon",
-                    tint = Color.Black,
-                )
-            }
-
-            IconButton(
-                onClick = { navController.navigate(Destinations.personnel) }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Check,
-                    contentDescription = "Check Icon",
-                    tint = Color.Red,
-                )
-            }
-        }
-        MakeFareText(lowerThumb, upperThumb)
-    }
-}
-
 @ExperimentalMaterialApi
 @Composable
 private fun Graph(
@@ -198,7 +115,7 @@ private fun Graph(
     lowerThumb: Float,
     upperThumb: Float,
     sliderPosition: ClosedFloatingPointRange<Float>,
-    setValue: (ClosedFloatingPointRange<Float>) -> Unit
+    setValue: (ClosedFloatingPointRange<Float>) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -235,33 +152,6 @@ private fun Graph(
                     thumbColor = Color.Blue,
                 ),
         )
-    }
-}
-
-@Composable
-private fun MakeFareText(lowerThumb: Float, upperThumb: Float) {
-    Column() {
-        Text(
-            text = "가격 범위",
-            fontSize = 10.sp
-        )
-        val changeMoney = DecimalFormat("#,###")
-        if ((upperThumb * 1000000) >= 1000000f) {
-            Text(
-                text = "${changeMoney.format(lowerThumb * 1000000)}원 - " +
-                        "${changeMoney.format(1000000)}원+",
-            )
-        } else if ((lowerThumb * 1000000 > 1000000f) && (upperThumb * 1000000 > 1000000f)) {
-            Text(
-                text = "${changeMoney.format(1000000)}원+" +
-                        "${changeMoney.format(1000000)}원+",
-            )
-        } else {
-            Text(
-                text = "${changeMoney.format(lowerThumb * 1000000)}원 - " +
-                        "${changeMoney.format(upperThumb * 1000000)}원",
-            )
-        }
     }
 }
 

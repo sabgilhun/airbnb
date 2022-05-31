@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.todo.airbnb.data.Travel
+import com.example.todo.airbnb.presentation.main.components.Destinations
 import com.example.todo.airbnb.presentation.main.components.MainAppBar
-import com.example.todo.airbnb.presentation.main.components.navigateToCalendar
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
 
@@ -61,8 +61,10 @@ fun SearchMainScreen(navController: NavController, viewModel: SearchViewModel) {
             }
             is SearchWidgetState.OPEN -> {
                 when {
-                    searchTextState.isEmpty() -> SearchList(navController, travelLocations)
-                    else -> SearchList(navController, searchLocations)
+                    searchTextState.isEmpty() -> SearchList(navController,
+                        travelLocations,
+                        viewModel)
+                    else -> SearchList(navController, searchLocations, viewModel)
                 }
                 BackHandler {
                     viewModel.updateSearchWidgetState(SearchWidgetState.CLOSED)
@@ -75,7 +77,11 @@ fun SearchMainScreen(navController: NavController, viewModel: SearchViewModel) {
 
 @ExperimentalMaterialApi
 @Composable
-private fun SearchList(navController: NavController, travelLocations: List<Travel>) {
+private fun SearchList(
+    navController: NavController,
+    travelLocations: List<Travel>,
+    viewModel: SearchViewModel,
+) {
     LazyColumn(
         modifier = Modifier
             .padding(start = 16.dp, bottom = 60.dp, top = 32.dp, end = 16.dp)
@@ -94,8 +100,7 @@ private fun SearchList(navController: NavController, travelLocations: List<Trave
                 Row(
                     modifier = Modifier
                         .clickable {
-                            val backStackEntry = requireNotNull(navController.currentBackStackEntry)
-                            navigateToCalendar(location, navController, backStackEntry)
+                            navController.navigate(Destinations.calendar)
                         }
                         .fillMaxWidth()
                 ) { MakeItem(location = location) }

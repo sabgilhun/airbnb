@@ -10,16 +10,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun bottomScreen(
+fun BottomScreen(
     title: String,
     onRemove: () -> Unit,
     onSkip: () -> Unit,
 ) {
-    var text = "건너뛰기"
-    if (title.isNotEmpty()) {
-        text = "지우기"
-    }
-
+    val text = if (title.isNotEmpty()) "지우기" else "건너뛰기"
     Row(
         modifier = Modifier
             .height(56.dp)
