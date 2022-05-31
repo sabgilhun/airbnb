@@ -112,9 +112,11 @@
 
 ### 🚧 접속 Test
 - [x] Bastion Instance 접속 성공
+
   <img width="653" alt="스크린샷 2022-05-30 오후 2 37 33" src="https://user-images.githubusercontent.com/79444040/170924030-914e247d-4cc7-4eb0-8013-61df9cd45b07.png">
 
 - [x] Bastion Instance 접속 후 Private 서브넷 접속 성공
+
   <img width="601" alt="스크린샷 2022-05-30 오후 2 39 08" src="https://user-images.githubusercontent.com/79444040/170924303-202aa9bc-4aca-454a-94f7-8fe8764de606.png">
 
 
