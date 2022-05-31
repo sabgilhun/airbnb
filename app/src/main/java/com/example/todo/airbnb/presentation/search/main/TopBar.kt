@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.example.todo.airbnb.presentation.search.SearchWidgetState
+import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
 import com.example.todo.airbnb.ui.theme.Gray
 
 @Composable

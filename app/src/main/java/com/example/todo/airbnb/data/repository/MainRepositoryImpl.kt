@@ -35,14 +35,14 @@ class MainRepositoryImpl : MainRepository {
     )
 
     private val accommodationList = listOf(
-        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소"),
-        Accommodations(dummyImage, "독특한 공간"),
-        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소"),
-        Accommodations(dummyImage, "독특한 공간"),
-        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소"),
-        Accommodations(dummyImage, "독특한 공간"),
-        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소"),
-        Accommodations(dummyImage, "독특한 공간")
+        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소", 100000),
+        Accommodations(dummyImage, "독특한 공간", 150000),
+        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소", 150000),
+        Accommodations(dummyImage, "독특한 공간", 200000),
+        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소", 650000),
+        Accommodations(dummyImage, "독특한 공간", 400000),
+        Accommodations(dummyImage, "자연생활을 만끽할 수\n있는 숙소", 400000),
+        Accommodations(dummyImage, "독특한 공간", 400000)
     )
 
     override fun getSearchWordList(searchWord: String): Flow<List<Travel>> = flow {
