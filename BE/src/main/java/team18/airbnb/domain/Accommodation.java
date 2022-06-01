@@ -1,15 +1,6 @@
 package team18.airbnb.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,21 +15,39 @@ public class Accommodation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private float startPoint;
+    private int nReview;
+    private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodation_info_id")
+    @Embedded
+    private AccommodationAddress accommodationAddress;
+
+    @Embedded
     private AccommodationInfo accommodationInfo;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodation_price_id")
-    private AccommodationPrice accommodationPrice;
+    public Accommodation(float startPoint, int nReview, String description,
+                         AccommodationAddress accommodationAddress,
+                         AccommodationInfo accommodationInfo,
+                         Region region) {
 
-    @Enumerated(EnumType.STRING)
-    private AccommodationType type;
+        this.startPoint = startPoint;
+        this.nReview = nReview;
+        this.description = description;
+        this.accommodationAddress = accommodationAddress;
+        this.accommodationInfo = accommodationInfo;
 
-    private String accommodationName;
-    private String accommodationAddress;
+        if (region != null) {
+            changeRegion(region);
+        }
+    }
+
+    // TODO : 양방향 편의 메서드 작성
+    private void changeRegion(Region region) {
+        this.region = region;
+        region.getAccommodations().add(this);
+    }
 }

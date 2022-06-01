@@ -5,21 +5,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Region {
+public class AccommodationImg {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String distance;
-    private String regionImg;
-    private String regionName;
+    private String mainImg;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
-    private List<Accommodation> accommodations;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accommodation_id")
+    private Accommodation accommodation;
+
+    @Embedded
+    private AccommodationSubImg accommodationSubImg;
 }

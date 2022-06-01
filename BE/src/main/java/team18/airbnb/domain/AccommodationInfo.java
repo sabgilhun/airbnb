@@ -1,33 +1,15 @@
 package team18.airbnb.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Entity
-@Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Embeddable
 public class AccommodationInfo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int nBed;
+    private int nBath;
+    private int maxGuest;
 
-    @OneToOne(mappedBy = "accommodationInfo", fetch = FetchType.LAZY)
-    private Accommodation accommodation;
+    @Enumerated(EnumType.STRING)
+    private AccommodationType accommodationType;
 
-    private String description;
-    private int numberOfBed;
-    private int numberOfBath;
-    private int discountOfWeek;
-    private int maximumNumberOfGuests;
-    private String accommodationMainImg;
-    private String accommodationDetailImg;
 }
