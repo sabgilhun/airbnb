@@ -1,5 +1,6 @@
 package com.example.todo.airbnb.data.repository
 
+import com.example.todo.airbnb.common.utillity.RetrofitUtil
 import com.example.todo.airbnb.data.Accommodations
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.domain.repository.MainRepository
@@ -46,10 +47,15 @@ class MainRepositoryImpl : MainRepository {
     )
 
     override fun getSearchWordList(searchWord: String): Flow<List<Travel>> = flow {
-        val searchList = locations.filter {
-            it.name.contains(searchWord)
+        val response = RetrofitUtil.apiService.getSearchLocation(keyword = searchWord)
+        if (response.isSuccessful) {
+            val body = response.body()
+            val travel = body?.searchPoiInfo?.pois?.poi?.map {
+                Travel(null, it.name.toString())
+            }
+            if (travel != null)
+                emit(travel)
         }
-        emit(searchList)
     }
 
     override fun getTravelLocations(): Flow<List<Travel>> = flow {

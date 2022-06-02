@@ -1,24 +1,27 @@
 package com.example.todo.airbnb.presentation.search
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import android.util.Log
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todo.airbnb.data.Accommodations
+import com.example.todo.airbnb.data.SearchResult
+import com.example.todo.airbnb.data.Spot
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.data.repository.MainRepositoryImpl
+import com.example.todo.airbnb.data.repository.SpotRepositoryImpl
 import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.domain.repository.MainRepository
+import com.example.todo.airbnb.domain.repository.SpotRepository
 import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
+import com.example.todo.airbnb.presentation.search.searchmap.MapEvent
+import com.example.todo.airbnb.presentation.search.searchmap.MapState
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
     private val repository: MainRepository = MainRepositoryImpl(),
+    private val spotRepository: SpotRepository = SpotRepositoryImpl(),
 ) : ViewModel() {
 
     private val _searchWidgetState: MutableState<SearchWidgetState> =
@@ -40,10 +43,13 @@ class SearchViewModel(
     private var _search: MutableState<Search?> = mutableStateOf(null)
     val search: State<Search?> = _search
 
+    var state by mutableStateOf(MapState())
+
     init {
         getTravelLocations()
         getSearchLocations("양재")
         getAccommodations()
+        getSpots()
     }
 
     fun addReservation(newSearch: Search) {
@@ -86,6 +92,27 @@ class SearchViewModel(
             accommodations.collect {
                 _accommodations.value = it
             }
+        }
+    }
+
+    fun onEvent(event: MapEvent) {
+        when (event) {
+            is MapEvent.OnMapLongClick -> {
+                viewModelScope.launch {
+                    Log.d("test", "onEvent: ${event.latLng.latitude} ${event.latLng.longitude}")
+                }
+            }
+            is MapEvent.OnInfoWindowLongClick -> {
+                viewModelScope.launch {
+                    Log.d("test", "onEvent: ${event.spot}")
+                }
+            }
+        }
+    }
+
+    fun getSpots() = viewModelScope.launch {
+        spotRepository.getSpots().collectLatest { spots ->
+            state = state.copy(searchResult = spots)
         }
     }
 }

@@ -102,11 +102,21 @@ fun CalendarTopAppBar(
                 }
                 IconButton(onClick = {
                     if (selectedDates.isNotEmpty()) {
+                        val reservation = viewModel.search.value
                         val split = selectedDates.split(" - ")
+
                         if (split.size > 1) viewModel.addReservation(
-                            Search(split[0], split[1], null)
+                            reservation?.copy(
+                                checkIn = split[0],
+                                checkOut = split[1]
+                            ) ?: Search()
                         )
-                        else viewModel.addReservation(Search(split[0], split[0], null))
+                        else viewModel.addReservation(
+                            reservation?.copy(
+                                checkIn = split[0],
+                                checkOut = split[0]
+                            ) ?: Search()
+                        )
                         navController.navigate(Destinations.fare)
                     }
                 }) {

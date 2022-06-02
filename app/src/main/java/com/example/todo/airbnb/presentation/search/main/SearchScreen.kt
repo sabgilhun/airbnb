@@ -1,5 +1,6 @@
 package com.example.todo.airbnb.presentation.search.components
 
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.todo.airbnb.data.Travel
+import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.presentation.main.components.Destinations
 import com.example.todo.airbnb.presentation.main.components.MainAppBar
 import com.example.todo.airbnb.presentation.search.SearchViewModel
@@ -55,7 +57,7 @@ fun SearchMainScreen(navController: NavController, viewModel: SearchViewModel) {
                     modifier = Modifier.verticalScroll(rememberScrollState())
                 ) {
                     LoadMainImage()
-                    TravelScreen(viewModel = viewModel)
+                    TravelScreen(viewModel = viewModel, navController)
                     AccommodationsScreen(viewModel = viewModel)
                 }
             }
@@ -100,6 +102,7 @@ private fun SearchList(
                 Row(
                     modifier = Modifier
                         .clickable {
+                            viewModel.addReservation(Search(location = location.name))
                             navController.navigate(Destinations.calendar)
                         }
                         .fillMaxWidth()

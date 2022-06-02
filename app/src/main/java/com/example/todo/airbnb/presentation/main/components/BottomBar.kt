@@ -69,9 +69,18 @@ fun BottomBar(
                 alwaysShowLabel = true,
                 selected = (currentRoute == item.route) || selectNavigation(currentRoute, item),
                 onClick = {
-                    navController.navigate(item.route) {
-                        launchSingleTop = true
-                        restoreState = true
+                    val backStackEntry = navController.previousBackStackEntry
+                    val route = backStackEntry?.destination?.route
+                    if (item.route == "검색") {
+                        navController.navigate(route ?: item.route) {
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    } else {
+                        navController.navigate(item.route) {
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 }
             )
@@ -116,8 +125,14 @@ private fun NavGraphBuilder.airbnbNavGraph(
     composable(route = Destinations.personnel) {
         PersonnelScreen(navController = navController, viewModel)
     }
-    composable(route = Destinations.searchResult) { SearchResultScreen(navController = navController) }
-    composable(route = Destinations.searchMap) { SearchMapScreen(navController = navController) }
+    composable(route = Destinations.searchResult) {
+        SearchResultScreen(navController = navController,
+            viewModel)
+    }
+    composable(route = Destinations.searchMap) {
+        SearchMapScreen(navController = navController,
+            viewModel)
+    }
     composable(route = Destinations.searchCondition) { SearchConditionScreen(navController = navController) }
     composable(route = Destinations.detail) { DetailScreen(navController = navController) }
 }
