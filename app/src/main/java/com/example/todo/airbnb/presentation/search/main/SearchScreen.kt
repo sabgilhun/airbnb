@@ -61,10 +61,11 @@ fun SearchMainScreen(navController: NavController, viewModel: SearchViewModel) {
             }
             is SearchWidgetState.OPEN -> {
                 when {
-                    searchTextState.isEmpty() -> SearchList(navController,
-                        travelLocations,
-                        viewModel)
-                    else -> SearchList(navController, searchLocations, viewModel)
+                    searchTextState.isEmpty() -> SearchList(
+                        navController,
+                        travelLocations
+                    )
+                    else -> SearchList(navController, searchLocations)
                 }
                 BackHandler {
                     viewModel.updateSearchWidgetState(SearchWidgetState.CLOSED)
@@ -80,7 +81,6 @@ fun SearchMainScreen(navController: NavController, viewModel: SearchViewModel) {
 private fun SearchList(
     navController: NavController,
     travelLocations: List<Travel>,
-    viewModel: SearchViewModel,
 ) {
     LazyColumn(
         modifier = Modifier

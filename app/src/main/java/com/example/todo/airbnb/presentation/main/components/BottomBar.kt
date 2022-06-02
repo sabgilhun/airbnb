@@ -21,7 +21,7 @@ import com.example.todo.airbnb.presentation.search.components.SearchScreen
 import com.example.todo.airbnb.presentation.search.date.DateScreen
 import com.example.todo.airbnb.presentation.search.detail.DetailScreen
 import com.example.todo.airbnb.presentation.search.fare.components.FareScreen
-import com.example.todo.airbnb.presentation.search.personnel.PersonnelScreen
+import com.example.todo.airbnb.presentation.search.personnel.components.PersonnelScreen
 import com.example.todo.airbnb.presentation.search.searchmap.SearchMapScreen
 import com.example.todo.airbnb.presentation.search.searchresult.SearchResultScreen
 import com.example.todo.airbnb.presentation.search.serachcondition.SearchConditionScreen

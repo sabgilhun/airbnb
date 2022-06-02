@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.todo.airbnb.data.Accommodations
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.data.repository.MainRepositoryImpl
+import com.example.todo.airbnb.domain.model.Personnel
 import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.domain.repository.MainRepository
 import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
@@ -40,6 +41,9 @@ class SearchViewModel(
     private var _search: MutableState<Search?> = mutableStateOf(null)
     val search: State<Search?> = _search
 
+    private val _personnel: MutableState<Personnel> = mutableStateOf(Personnel(0, 0, 0))
+    val personnel: State<Personnel> = _personnel
+
     init {
         getTravelLocations()
         getSearchLocations("양재")
@@ -69,6 +73,10 @@ class SearchViewModel(
                 _searchLocations.value = it
             }
         }
+    }
+
+    fun updatePersonnelText(newPersonnel: Personnel) {
+        _personnel.value = newPersonnel
     }
 
     private fun getTravelLocations() {
