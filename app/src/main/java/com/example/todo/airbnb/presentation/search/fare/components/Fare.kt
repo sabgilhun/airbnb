@@ -34,7 +34,9 @@ internal fun Fare(
             .fillMaxWidth()
     ) {
         Column(
-            modifier = Modifier.width(350.dp),
+            modifier = Modifier
+                .width(350.dp)
+                .padding(top = 100.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Graph(
@@ -117,17 +119,9 @@ private fun Graph(
     sliderPosition: ClosedFloatingPointRange<Float>,
     setValue: (ClosedFloatingPointRange<Float>) -> Unit,
 ) {
-    Column(
-        modifier = Modifier
-            .height(200.dp)
-            .width(350.dp),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Box(modifier = Modifier.width(350.dp)) {
         Box(
-            Modifier.graphicsLayer {
-                rotationX = 180f
-            }
+            Modifier.graphicsLayer { rotationX = 180f }
         ) {
             for (i in 1..20) {
                 val checkQuantity = checkFare(i, viewModel)
@@ -135,23 +129,23 @@ private fun Graph(
                 MakeGraph(i, checkQuantity, checkColor)
             }
         }
-    }
-    Row(
-        modifier = Modifier
-            .width(350.dp)
-    ) {
-        RangeSlider(
+        Row(
             modifier = Modifier
-                .background(color = Color(0xffE0E0E0)),
-            values = sliderPosition,
-            onValueChange = { setValue(it) },
-            valueRange = 0f..2f, // 5f == 최대5백만원
-            steps = 19,
-            colors = SliderDefaults
-                .colors(
-                    thumbColor = Color.Blue,
+                .width(350.dp)
+                .padding(top = 98.dp)
+                .align(Alignment.BottomCenter)
+        ) {
+            RangeSlider(
+                values = sliderPosition,
+                onValueChange = { setValue(it) },
+                valueRange = 0f..2f, // 5f == 최대5백만원
+                colors = SliderDefaults.colors(
+                    thumbColor = Color.LightGray,
+                    activeTrackColor = Color.Gray,
+                    inactiveTrackColor = Color.LightGray,
                 ),
-        )
+            )
+        }
     }
 }
 

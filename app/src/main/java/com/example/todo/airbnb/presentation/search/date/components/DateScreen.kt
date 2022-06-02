@@ -1,5 +1,6 @@
 package com.example.todo.airbnb.presentation.search.date.components
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,6 +21,7 @@ import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.components.common.BottomScreen
 import com.example.todo.airbnb.presentation.search.date.DateViewModel
 import com.example.todo.airbnb.ui.theme.Gray
+import java.time.LocalDate
 
 @Composable
 fun DateScreen(navController: NavController, viewModel: SearchViewModel) {
@@ -36,7 +38,8 @@ fun DateScreen(navController: NavController, viewModel: SearchViewModel) {
                 DaySelected(calendarDay.value.toInt(), calendarMonth, dateState.year)
             )
         },
-        onClear = { dateViewModel.onClear() }
+        onClear = { dateViewModel.onClear() },
+        dateViewModel = dateViewModel
     )
 }
 
@@ -48,11 +51,12 @@ fun CalendarContent(
     calendarYear: CalendarYear,
     onDayClicked: (CalendarDay, CalendarMonth) -> Unit,
     onClear: () -> Unit,
+    dateViewModel: DateViewModel,
 ) {
     Scaffold(
         backgroundColor = Color.White,
         topBar = {
-            CalendarTopAppBar(navController, selectedDates, viewModel)
+            CalendarTopAppBar(navController, selectedDates, viewModel, dateViewModel)
         },
         bottomBar = {
             BottomScreen(
@@ -71,6 +75,7 @@ fun CalendarTopAppBar(
     navController: NavController,
     selectedDates: String,
     viewModel: SearchViewModel,
+    dateViewModel: DateViewModel,
 ) {
     Surface(
         modifier = Modifier
@@ -98,11 +103,27 @@ fun CalendarTopAppBar(
                 }
                 IconButton(onClick = {
                     if (selectedDates.isNotEmpty()) {
+                        val reservation = viewModel.search.value
                         val split = selectedDates.split(" - ")
+                        val from = dateViewModel.dates.value.from
+                        val to = dateViewModel.dates.value.to
+
+                        val fromMonth =
+                            if (from.month.monthNumber in (1..9)) "0${from.month.monthNumber}" else "${from.month.monthNumber}"
+                        val fromDay = if (from.day in (1..9)) "0${from.day}" else "${from.day}"
+                        val toMonth =
+                            if (to.month.monthNumber in (1..9)) "0${to.month.monthNumber}" else "${to.month.monthNumber}"
+                        val toDay = if (to.day in (1..9)) "0${to.day}" else "${to.day}"
+
+                        val checkIn = LocalDate.parse("${from.month.year}-${fromMonth}-${fromDay}")
+                        val checkOut = LocalDate.parse("${to.month.year}-${toMonth}-${toDay}")
+
                         if (split.size > 1) viewModel.addReservation(
-                            Search(split[0], split[1], null)
+                            reservation?.copy(checkIn = checkIn, checkOut = checkOut) ?: Search()
                         )
-                        else viewModel.addReservation(Search(split[0], split[0], null))
+                        else viewModel.addReservation(
+                            reservation?.copy(checkIn = checkIn, checkOut = checkIn) ?: Search()
+                        )
                         navController.navigate(Destinations.fare)
                     }
                 }) {
