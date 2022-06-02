@@ -1,15 +1,13 @@
 package com.example.todo.airbnb.presentation.search.date.components
 
-import androidx.annotation.VisibleForTesting
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import com.example.todo.airbnb.data.datasource.CalendarYear
+import com.example.todo.airbnb.data.model.date.CalendarYear
+import com.example.todo.airbnb.presentation.search.date.components.DaySelected.Companion.DaySelectedEmpty
 
-class DatesSelectedState(private val year: CalendarYear) {
-    private var from by mutableStateOf(DaySelectedEmpty)
-    private var to by mutableStateOf(DaySelectedEmpty)
-
+data class DatesSelectedState(
+    val year: CalendarYear,
+    val from: DaySelected = DaySelectedEmpty,
+    val to: DaySelected = DaySelectedEmpty,
+) {
     override fun toString(): String {
         if (from == DaySelectedEmpty && to == DaySelectedEmpty) return ""
         var output = from.toString()
@@ -17,81 +15,5 @@ class DatesSelectedState(private val year: CalendarYear) {
             output += " - $to"
         }
         return output
-    }
-
-    fun daySelected(newDate: DaySelected) {
-        if (from == DaySelectedEmpty && to == DaySelectedEmpty) {
-            setDates(newDate, DaySelectedEmpty)
-        } else if (from != DaySelectedEmpty && to != DaySelectedEmpty) {
-            clearDates()
-            daySelected(newDate = newDate)
-        } else if (from == DaySelectedEmpty) {
-            if (newDate < to) setDates(newDate, to)
-            else if (newDate > to) setDates(to, newDate)
-        } else if (to == DaySelectedEmpty) {
-            if (newDate < from) setDates(newDate, from)
-            else if (newDate > from) setDates(from, newDate)
-        }
-    }
-
-    private fun setDates(newFrom: DaySelected, newTo: DaySelected) {
-        if (newTo == DaySelectedEmpty) {
-            from = newFrom
-            from.calendarDay.value.status = DaySelectedStatus.FirstLastDay
-        } else {
-            from = newFrom.apply { calendarDay.value.status = DaySelectedStatus.FirstDay }
-            selectDatesInBetween(newFrom, newTo)
-            to = newTo.apply { calendarDay.value.status = DaySelectedStatus.LastDay }
-        }
-    }
-
-    private fun selectDatesInBetween(from: DaySelected, to: DaySelected) {
-        if (from.month == to.month) {
-            for (i in (from.day + 1) until to.day)
-                from.month.getDay(i).status = DaySelectedStatus.Selected
-        } else {
-            for (i in (from.day + 1) until from.month.numDays + 1) {
-                from.month.getDay(i).status = DaySelectedStatus.Selected
-            }
-            for (i in (from.month.monthNumber + 1) until to.month.monthNumber) {
-                val month = year[i - 1]
-                for (j in 1 until month.numDays) {
-                    month.getDay(j).status = DaySelectedStatus.Selected
-                }
-                month.getDay(month.numDays).status = DaySelectedStatus.LastDay
-            }
-            for (i in 1 until to.day) {
-                to.month.getDay(i).status = DaySelectedStatus.Selected
-            }
-        }
-    }
-
-    @VisibleForTesting
-    fun clearDates() {
-        if (from != DaySelectedEmpty || to != DaySelectedEmpty) {
-            if (from.month == to.month) {
-                for (i in from.day..to.day) {
-                    from.month.getDay(i).status = DaySelectedStatus.NoSelected
-                }
-            } else {
-                for (i in from.day..from.month.numDays) {
-                    from.month.getDay(i).status = DaySelectedStatus.NoSelected
-                }
-                for (i in (from.month.monthNumber + 1) until to.month.monthNumber) {
-                    val month = year[i - 1]
-                    for (j in 1..month.numDays) {
-                        month.getDay(j).status = DaySelectedStatus.NoSelected
-                    }
-                }
-
-                for (i in 1..to.day) {
-                    to.month.getDay(i).status = DaySelectedStatus.NoSelected
-                }
-            }
-        }
-        from.calendarDay.value.status = DaySelectedStatus.NoSelected
-        from = DaySelectedEmpty
-        to.calendarDay.value.status = DaySelectedStatus.NoSelected
-        to = DaySelectedEmpty
     }
 }
