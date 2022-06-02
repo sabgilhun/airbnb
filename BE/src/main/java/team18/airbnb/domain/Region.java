@@ -4,19 +4,22 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Region {
 
-    @Id @GeneratedValue
-    @Column(name = "region_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String distance;
+    private String regionImg;
     private String regionName;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
+    private List<Accommodation> accommodations;
 }

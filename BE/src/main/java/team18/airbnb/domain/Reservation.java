@@ -1,41 +1,34 @@
 package team18.airbnb.domain;
 
-import java.time.LocalDateTime;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation {
 
+    // 예약 ID
     @Id
-    @GeneratedValue
-    @Column(name = "reservation_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usee_id")
-    private User userId;
+    private LocalDateTime checkInTime;
+    private LocalDateTime checkoutTime;
+    private int nAdult;
+    private int nChild;
+    private int nInfant;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accommodationId_id")
-    private Accommodation accommodationId;
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    @Column(nullable = false)
-    private LocalDateTime checkOut;
-    @Column(nullable = false)
-    private LocalDateTime checkIn;
-    @Column(nullable = false)
-    private int numberOfGuests;
+    @Embedded
+    private ReservationFee reservationFee;
+
 }

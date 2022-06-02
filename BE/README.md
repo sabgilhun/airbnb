@@ -1,4 +1,4 @@
-### `DB 요구사항 분석` 
+### `DB 요구사항 분석`
 
 - 회원 가입을 위해 아이디, 전화번호, 생년월일, 주소를 입력해야한다.
 - 회원은 회원 아이디로 식별한다.
@@ -23,8 +23,8 @@
   - 이름
   - 주소
 
-   
-- `숙소 정보` - `AccoomodationInfo` 
+
+- `숙소 정보` - `AccoomodationInfo`
   - 숙소 정보 ID (PK)
   - 숙소 객체 (FK - accommodation_id)
   - 설명
@@ -35,19 +35,19 @@
   - 총 게스트 수
   - 이미지
 
-  
-- `숙소 가격` -`AccommodationPrice` 
+
+- `숙소 가격` -`AccommodationPrice`
   - 숙소 가격 ID (PK)
   - 숙소 객체 (FK - accommodation_id)
   - 객실비
   - 청소비
-  
+
 
 - `지역` - `Region`
   - 지역 ID (PK)
   - 이름
 
-  
+
 - `예약` - `Reservation`
   - 예약 ID (PK)
   - 숙소 객체 (FK - accommodation_id)
@@ -56,7 +56,7 @@
   - 체크 인
   - 총 게스트 수
 
-  
+
 - `리뷰` - `Review`
   - 리뷰 ID (PK)
   - 숙소 객체 (FK - accommodation_id)
@@ -64,7 +64,7 @@
   - 별점
   - 내용
 
-  
+
 - `유저` -`User`
   - 유저 ID (PK)
   - 이름
@@ -72,7 +72,51 @@
   - 주소
   - 생년월일
   - 핸드폰 번호
-  
 
 ![E-R다이어그램](https://user-images.githubusercontent.com/79444040/170203077-182d0523-126d-4ef7-bf13-e2959fd7c141.png)
 <img width="900" alt="스크린샷 2022-05-25 오후 4 29 53" src="https://user-images.githubusercontent.com/79444040/170205968-a5d65211-1077-4ab3-9cc5-ef006a0576fa.png">
+
+### 1주차 첫번째 리뷰 수정내용
+
+- [x] 어노테이션 한줄에 여러개 작성한거 수정
+- [x] PK에 명시해놓은 컬럼명 제거
+- [x] 오타 수정
+- [x] 참조하고 있는 필드명 변경
+- [x] 단반향으로 설계되어 있는 매핑 양방향 고려해보기
+
+### 고민한 부분
+
+- 양뱡향 연관관계 `편의메서드`가 `OneToOne`에서 필요한가?
+
+```text
+  편의 메서드를 사용하는 이유
+    - 양뱡향 연관관계 매핑 시 JPA 입장에서 보았을때 서로 조회할 수 있게 객체를 필드로 정의하고 연관관계 주인만 잘 설정해 준다면 문제가 없다. 
+    하지만,
+```
+
+### `ERD 다이어그램 작성 (초안)`
+### 💡 Issue
+- [x] AWS 인프라 구상도 작성 (draw.io tool 사용)
+- [x] Airbnb 프로젝트에서 사용할 VPC 사설 네트워크 망 생성
+- [x] Public 서브넷 1개, Private 서브넷 2개 생성
+- [x] 인터넷과의 통신을 위한 인터넷 게이트웨이 생성 후 VPC 에 연결
+- [x] 각 서브넷에 연결할 라우팅 테이블 3개 생성 후 각 서브넷과 연결
+- [x] NAT 인스턴스, Bastion 인스턴스, WEB Server 인스턴스, WAS 인스턴스, MySQL 인스턴스 생성
+- [x] 각 인스턴스 보안그룹을 따로 생성해서 인바운드 규칙 추가
+- [x] Bastion 인스턴스를 통해 Private 서브넷에 접근하기 위해 ssh-agent 를 사용해 Private Key 를 메모리에 캐싱
+- [x] 캐싱된 Private Key 를 가지고 Bastion 인스턴스에서 Private 서브넷 접속 테스트
+- [x] README 파일에 업로드 예정
+
+### ✏️ AWS 인프라 구상도
+![Airbnb docker 전 최종 인프라 drawio](https://user-images.githubusercontent.com/79444040/170923420-e29e2fc8-faf6-41b6-bee6-d96fab02d911.png)
+
+### 🚧 접속 Test
+- [x] Bastion Instance 접속 성공
+
+  <img width="653" alt="스크린샷 2022-05-30 오후 2 37 33" src="https://user-images.githubusercontent.com/79444040/170924030-914e247d-4cc7-4eb0-8013-61df9cd45b07.png">
+
+- [x] Bastion Instance 접속 후 Private 서브넷 접속 성공
+
+  <img width="601" alt="스크린샷 2022-05-30 오후 2 39 08" src="https://user-images.githubusercontent.com/79444040/170924303-202aa9bc-4aca-454a-94f7-8fe8764de606.png">
+
+

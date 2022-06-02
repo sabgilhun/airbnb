@@ -9,16 +9,18 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class AccommodationPrice {
+public class AccommodationImg {
 
-    @Id @GeneratedValue
-    @Column(name = "accommdationPrice_id")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    private String mainImg;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accommodation_id")
     private Accommodation accommodation;
 
-    private int roomCharge;
-    private int cleaningFee;
+    @Embedded
+    private AccommodationSubImg accommodationSubImg;
 }
