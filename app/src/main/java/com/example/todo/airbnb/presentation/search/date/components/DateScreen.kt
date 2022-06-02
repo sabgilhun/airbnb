@@ -1,7 +1,5 @@
-package com.example.todo.airbnb.presentation.search.date
+package com.example.todo.airbnb.presentation.search.date.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -13,30 +11,29 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.todo.airbnb.data.datasource.CalendarYear
+import com.example.todo.airbnb.data.model.date.CalendarDay
+import com.example.todo.airbnb.data.model.date.CalendarMonth
+import com.example.todo.airbnb.data.model.date.CalendarYear
 import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.presentation.main.components.Destinations
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.components.common.BottomScreen
-import com.example.todo.airbnb.presentation.search.date.components.Calendar
-import com.example.todo.airbnb.presentation.search.date.components.CalendarDay
-import com.example.todo.airbnb.presentation.search.date.components.CalendarMonth
-import com.example.todo.airbnb.presentation.search.date.components.DaySelected
+import com.example.todo.airbnb.presentation.search.date.DateViewModel
 import com.example.todo.airbnb.ui.theme.Gray
 
 @Composable
 fun DateScreen(navController: NavController, viewModel: SearchViewModel) {
     val dateViewModel: DateViewModel = viewModel()
-    val calendarYear = dateViewModel.calendarYear
+    val dateState = dateViewModel.dates.value
 
     CalendarContent(
         viewModel = viewModel,
         navController = navController,
-        selectedDates = dateViewModel.datesSelected.toString(),
-        calendarYear = calendarYear,
+        selectedDates = dateViewModel.dates.value.toString(),
+        calendarYear = dateState.year,
         onDayClicked = { calendarDay, calendarMonth ->
             dateViewModel.onDaySelected(
-                DaySelected(calendarDay.value.toInt(), calendarMonth, calendarYear)
+                DaySelected(calendarDay.value.toInt(), calendarMonth, dateState.year)
             )
         },
         onClear = { dateViewModel.onClear() }

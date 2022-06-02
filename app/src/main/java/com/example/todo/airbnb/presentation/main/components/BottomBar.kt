@@ -15,10 +15,10 @@ import androidx.navigation.compose.navigation
 import com.example.todo.airbnb.R
 import com.example.todo.airbnb.presentation.reservation.components.ReservationScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
-import com.example.todo.airbnb.presentation.search.main.SearchScreen
-import com.example.todo.airbnb.presentation.search.date.DateScreen
+import com.example.todo.airbnb.presentation.search.date.components.DateScreen
 import com.example.todo.airbnb.presentation.search.detail.DetailScreen
 import com.example.todo.airbnb.presentation.search.fare.components.FareScreen
+import com.example.todo.airbnb.presentation.search.main.SearchScreen
 import com.example.todo.airbnb.presentation.search.personnel.PersonnelScreen
 import com.example.todo.airbnb.presentation.search.searchmap.SearchMapScreen
 import com.example.todo.airbnb.presentation.search.searchresult.SearchResultScreen

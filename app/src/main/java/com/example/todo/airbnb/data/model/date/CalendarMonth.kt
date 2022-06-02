@@ -1,4 +1,6 @@
-package com.example.todo.airbnb.presentation.search.date.components
+package com.example.todo.airbnb.data.model.date
+
+import com.example.todo.airbnb.presentation.search.date.components.DaySelectedStatus
 
 data class CalendarMonth(
     val name: String,

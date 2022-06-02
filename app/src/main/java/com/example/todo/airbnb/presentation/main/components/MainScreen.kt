@@ -1,7 +1,5 @@
 package com.example.todo.airbnb.presentation.main.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
