@@ -1,8 +1,8 @@
 package team18.airbnb.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,9 +14,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Reservation {
 
-    // 예약 ID
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reservation_id")
     private Long id;
 
     @Column(nullable = false)
@@ -40,6 +40,11 @@ public class Reservation {
     @Column(nullable = false)
     private int minPrice;
 
+    @Column(nullable = false)
+    private String username;
+
+    // 양방향 매핑일 때 무한루프 발생
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accommodation_id")
     private Accommodation accommodation;

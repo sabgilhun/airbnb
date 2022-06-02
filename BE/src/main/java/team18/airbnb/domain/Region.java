@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,6 +15,7 @@ public class Region {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "region_id")
     private Long id;
 
     private String distance;
@@ -21,5 +23,5 @@ public class Region {
     private String regionName;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
-    private List<Accommodation> accommodations;
+    private List<Accommodation> accommodations = new ArrayList<>();
 }
