@@ -1,10 +1,13 @@
 package team18.airbnb.domain;
 
+import lombok.Getter;
+
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 @Embeddable
+@Getter
 public class ReservationFee {
 
     // 일 수에 따른 총 금액

@@ -40,9 +40,6 @@ public class Reservation {
     @Column(nullable = false)
     private int minPrice;
 
-    @Column(nullable = false)
-    private String username;
-
     // 양방향 매핑일 때 무한루프 발생
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
