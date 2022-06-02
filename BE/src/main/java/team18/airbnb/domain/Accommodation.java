@@ -1,5 +1,7 @@
 package team18.airbnb.domain;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import lombok.AccessLevel;
@@ -18,6 +20,10 @@ public class Accommodation {
     private float startPoint;
     private int nReview;
     private String description;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "accommodation")
+    @JoinColumn(name = "reservation_id")
+    private List<Reservation> reservation;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
@@ -45,7 +51,6 @@ public class Accommodation {
         }
     }
 
-    // TODO : 양방향 편의 메서드 작성
     private void changeRegion(Region region) {
         this.region = region;
         region.getAccommodations().add(this);
