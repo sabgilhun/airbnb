@@ -18,8 +18,8 @@ public class SearchController {
 
     private final HomeService homeService;
 
-    @GetMapping("/search/{regionCount}")
-    public ResponseEntity<List<LookAroundRegionDto>> searchRegion(@PathVariable int regionCount) {
-        return ResponseEntity.ok(homeService.createRegion(regionCount));
+    @GetMapping("/search")
+    public ResponseEntity<List<LookAroundRegionDto>> searchRegion() {
+        return ResponseEntity.ok(homeService.createRegion());
     }
 }

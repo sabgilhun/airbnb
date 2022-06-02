@@ -25,11 +25,11 @@ class HomeServiceTest {
     void createRegion() {
 
         // when
-        List<LookAroundRegionDto> homeRegions = homeService.createRegion(4);
-        List<LookAroundRegionDto> searchRegions = homeService.createRegion(8);
+        List<LookAroundRegionDto> homeRegions = homeService.createRegion();
+        List<LookAroundRegionDto> searchRegions = homeService.createRegion();
 
         // then
-        assertThat(homeRegions.size()).isEqualTo(4);
+        assertThat(homeRegions.size()).isEqualTo(8);
         assertThat(searchRegions.size()).isEqualTo(8);
     }
 }

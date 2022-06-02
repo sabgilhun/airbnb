@@ -20,11 +20,11 @@ public class HomeController {
 
     private final HomeService homeService;
 
-    @GetMapping("/main/{regionCount}")
-    public ResponseEntity<Map<String, Object>> home(@PathVariable int regionCount) {
+    @GetMapping("/main")
+    public ResponseEntity<Map<String, Object>> home() {
 
         List<AccommodationByConceptDto> accommodationByConcepts = homeService.createAccommodationByConcept();
-        List<LookAroundRegionDto> regions = homeService.createRegion(regionCount);
+        List<LookAroundRegionDto> regions = homeService.createRegion();
 
         Map<String, Object> homeData = new HashMap<>();
         homeData.put("Accommodation" ,accommodationByConcepts);

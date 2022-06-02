@@ -32,11 +32,10 @@ public class HomeService {
         return accommodations;
     }
 
-        public List<LookAroundRegionDto> createRegion(int regionCount) {
+        public List<LookAroundRegionDto> createRegion() {
             List<Region> allRegion = homeRepository.findAll();
 
             return allRegion.stream()
-                    .limit(regionCount)
                     .map(LookAroundRegionDto::new)
                 .collect(Collectors.toList());
     }
