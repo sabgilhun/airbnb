@@ -9,7 +9,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalMaterialApi
 @Composable
 fun MainScreen(viewModel: SearchViewModel) {

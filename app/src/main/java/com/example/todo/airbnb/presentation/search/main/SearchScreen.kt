@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search.components
+package com.example.todo.airbnb.presentation.search.main
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
@@ -19,9 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.todo.airbnb.data.Travel
 import com.example.todo.airbnb.presentation.main.components.Destinations
-import com.example.todo.airbnb.presentation.main.components.MainAppBar
 import com.example.todo.airbnb.presentation.search.SearchViewModel
-import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
 
 @ExperimentalMaterialApi
 @Composable

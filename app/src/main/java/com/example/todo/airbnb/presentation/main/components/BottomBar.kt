@@ -1,7 +1,5 @@
 package com.example.todo.airbnb.presentation.main.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -17,7 +15,7 @@ import androidx.navigation.compose.navigation
 import com.example.todo.airbnb.R
 import com.example.todo.airbnb.presentation.reservation.components.ReservationScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
-import com.example.todo.airbnb.presentation.search.components.SearchScreen
+import com.example.todo.airbnb.presentation.search.main.SearchScreen
 import com.example.todo.airbnb.presentation.search.date.DateScreen
 import com.example.todo.airbnb.presentation.search.detail.DetailScreen
 import com.example.todo.airbnb.presentation.search.fare.components.FareScreen
@@ -79,7 +77,6 @@ fun BottomBar(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalMaterialApi
 @Composable
 fun BottomNavGraph(navController: NavHostController, viewModel: SearchViewModel) {
@@ -94,7 +91,6 @@ fun BottomNavGraph(navController: NavHostController, viewModel: SearchViewModel)
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalMaterialApi
 private fun NavGraphBuilder.airbnbNavGraph(
     navController: NavController,

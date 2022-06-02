@@ -1,8 +1,6 @@
 package com.example.todo.airbnb.data.datasource
 
 import android.annotation.SuppressLint
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.example.todo.airbnb.presentation.search.date.components.CalendarMonth
 import com.example.todo.airbnb.presentation.search.date.components.DatesSelectedState
 import com.example.todo.airbnb.presentation.search.date.components.DayOfWeek
@@ -12,7 +10,6 @@ import java.time.temporal.TemporalAdjusters
 
 typealias CalendarYear = List<CalendarMonth>
 
-@RequiresApi(Build.VERSION_CODES.O)
 class DatesLocalDataSource {
 
     private val dayOfWeek = listOf(

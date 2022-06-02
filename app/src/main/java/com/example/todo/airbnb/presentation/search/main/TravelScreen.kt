@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.search.components
+package com.example.todo.airbnb.presentation.search.main
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*

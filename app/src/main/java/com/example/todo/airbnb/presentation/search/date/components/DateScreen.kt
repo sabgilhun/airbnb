@@ -24,7 +24,6 @@ import com.example.todo.airbnb.presentation.search.date.components.CalendarMonth
 import com.example.todo.airbnb.presentation.search.date.components.DaySelected
 import com.example.todo.airbnb.ui.theme.Gray
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DateScreen(navController: NavController, viewModel: SearchViewModel) {
     val dateViewModel: DateViewModel = viewModel()

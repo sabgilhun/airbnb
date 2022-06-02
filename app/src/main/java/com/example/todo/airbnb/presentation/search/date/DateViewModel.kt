@@ -10,7 +10,6 @@ import com.example.todo.airbnb.domain.repository.DateRepository
 import com.example.todo.airbnb.presentation.search.date.components.DaySelected
 import kotlinx.coroutines.launch
 
-@RequiresApi(Build.VERSION_CODES.O)
 class DateViewModel(
     private val datesRepository: DateRepository = DateRepositoryImpl(DatesLocalDataSource()),
 ) : ViewModel() {

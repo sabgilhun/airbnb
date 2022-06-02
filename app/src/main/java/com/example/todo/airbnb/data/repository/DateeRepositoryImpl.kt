@@ -10,7 +10,6 @@ import com.example.todo.airbnb.presentation.search.date.components.DaySelected
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-@RequiresApi(Build.VERSION_CODES.O)
 class DateRepositoryImpl(
     private val datesLocalDataSource: DatesLocalDataSource,
 ) : DateRepository {
