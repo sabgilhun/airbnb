@@ -123,12 +123,14 @@ fun CalendarTopAppBar(
             if (selectedDates.isEmpty()) {
                 Text(
                     text = "날짜를 골라주세요.",
-                    modifier = Modifier.padding(start = 76.dp)
+                    modifier = Modifier.padding(start = 76.dp),
+                    style = MaterialTheme.typography.h5
                 )
             } else {
                 Text(
                     text = selectedDates,
-                    modifier = Modifier.padding(start = 76.dp)
+                    modifier = Modifier.padding(start = 76.dp),
+                    style = MaterialTheme.typography.h5
                 )
             }
         }

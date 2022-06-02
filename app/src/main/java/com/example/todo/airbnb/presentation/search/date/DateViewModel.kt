@@ -1,7 +1,5 @@
 package com.example.todo.airbnb.presentation.search.date
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.todo.airbnb.data.datasource.DatesLocalDataSource

@@ -1,6 +1,7 @@
 package com.example.todo.airbnb.presentation.search.date.components
 
 import com.example.todo.airbnb.data.datasource.CalendarYear
+import com.example.todo.airbnb.data.datasource.MonthOfYear
 import java.util.*
 
 data class DaySelected(
@@ -13,12 +14,7 @@ data class DaySelected(
     }
 
     override fun toString(): String {
-        val month = month.name
-            .substring(0, 3)
-            .replaceFirstChar {
-                if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-            }
-        return "$month $day"
+        return "${MonthOfYear.formatMonth(month.name)}월 ${day}일"
     }
 
     operator fun compareTo(other: DaySelected): Int {
@@ -30,4 +26,5 @@ data class DaySelected(
     }
 }
 
-val DaySelectedEmpty = DaySelected(0, CalendarMonth("", "", 0, 0, DayOfWeek.Sunday), emptyList())
+val DaySelectedEmpty =
+    DaySelected(0, CalendarMonth("", "", 0, 0, DayOfWeek.Sunday), emptyList())

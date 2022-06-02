@@ -117,7 +117,6 @@ private fun Day(
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
-                    // Parent will handle semantics
                     .clearAndSetSemantics {},
                 text = day.value,
                 style = MaterialTheme.typography.body1.copy(color = Color.Black)

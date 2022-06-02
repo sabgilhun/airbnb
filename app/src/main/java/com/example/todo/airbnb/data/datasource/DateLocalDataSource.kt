@@ -10,23 +10,28 @@ import java.time.temporal.TemporalAdjusters
 
 typealias CalendarYear = List<CalendarMonth>
 
+enum class MonthOfYear(val order: Int) {
+    January(1),
+    February(2),
+    March(3),
+    April(4),
+    May(5),
+    June(6),
+    July(7),
+    August(8),
+    September(9),
+    October(10),
+    November(11),
+    December(12);
+
+    companion object {
+        fun formatMonth(month: String): Int? {
+            return values().find { it.name == month }?.order
+        }
+    }
+}
+
 class DatesLocalDataSource {
-
-    private val dayOfWeek = listOf(
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-    )
-
     val calendarYear = getDayList()
     val datesSelected = DatesSelectedState(calendarYear)
 
@@ -34,21 +39,15 @@ class DatesLocalDataSource {
         datesSelected.daySelected(daySelected)
     }
 
-    private fun getDayList(): List<CalendarMonth> {
-        val list = mutableListOf<CalendarMonth>()
-        for (month in 1..12) {
-            val date = LocalDate.of(2021, month, 1)
-            list.add(
-                CalendarMonth(
-                    name = dayOfWeek[month - 1],
-                    year = date.year.toString(),
-                    numDays = date.with(TemporalAdjusters.lastDayOfMonth()).dayOfMonth,
-                    monthNumber = month,
-                    startDayOfWeek = DayOfWeek.values(date.dayOfWeek.toString()) ?: DayOfWeek.Sunday
-                )
-            )
-        }
-        return list
+    private fun getDayList(): List<CalendarMonth> = MonthOfYear.values().map {
+        val date = LocalDate.of(2021, it.order, 1)
+        CalendarMonth(
+            name = it.name,
+            year = date.year.toString(),
+            numDays = date.with(TemporalAdjusters.lastDayOfMonth()).dayOfMonth,
+            monthNumber = it.order,
+            startDayOfWeek = DayOfWeek.values(date.dayOfWeek.toString()) ?: DayOfWeek.Sunday
+        )
     }
 
     @SuppressLint("VisibleForTests")
