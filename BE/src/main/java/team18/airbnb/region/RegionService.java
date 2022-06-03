@@ -17,7 +17,7 @@ public class RegionService {
 
     private final RegionRepository regionRepository;
 
-    public List<AccommodationByConceptDto> createAccommodationByConcept() {
+    public List<AccommodationByConceptDto> createAccommodationByConceptDto() {
         List<AccommodationByConceptDto> accommodations = new ArrayList<>();
 
         AccommodationByConceptDto first =
@@ -32,7 +32,7 @@ public class RegionService {
         return accommodations;
     }
 
-        public List<LookAroundRegionDto> createRegion() {
+        public List<LookAroundRegionDto> createLookAroundRegionDto() {
             List<Region> allRegion = regionRepository.findAll();
 
             return allRegion.stream()

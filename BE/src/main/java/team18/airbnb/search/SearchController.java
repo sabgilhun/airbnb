@@ -19,6 +19,6 @@ public class SearchController {
 
     @GetMapping("/search")
     public ResponseEntity<List<LookAroundRegionDto>> searchRegion() {
-        return ResponseEntity.ok(regionService.createRegion());
+        return ResponseEntity.ok(regionService.createLookAroundRegionDto());
     }
 }

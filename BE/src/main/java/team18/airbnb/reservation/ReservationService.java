@@ -18,7 +18,7 @@ public class ReservationService {
         return reservationRepository.findByUsername();
     }
 
-    public List<UserReservationDto> createReservations(List<Reservation> findReservationsByUsername) {
+    public List<UserReservationDto> createUserReservationDto(List<Reservation> findReservationsByUsername) {
         return findReservationsByUsername.stream()
                 .map(UserReservationDto::new)
                 .collect(Collectors.toList());

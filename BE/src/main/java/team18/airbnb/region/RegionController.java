@@ -22,8 +22,8 @@ public class RegionController {
     @GetMapping("/main")
     public ResponseEntity<Map<String, Object>> home() {
 
-        List<AccommodationByConceptDto> accommodationByConcepts = regionService.createAccommodationByConcept();
-        List<LookAroundRegionDto> regions = regionService.createRegion();
+        List<AccommodationByConceptDto> accommodationByConcepts = regionService.createAccommodationByConceptDto();
+        List<LookAroundRegionDto> regions = regionService.createLookAroundRegionDto();
 
         Map<String, Object> homeData = new HashMap<>();
         homeData.put("Accommodation" ,accommodationByConcepts);

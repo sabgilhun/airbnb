@@ -26,8 +26,8 @@ class RegionServiceTest {
     void createRegion() {
 
         // when
-        List<LookAroundRegionDto> homeRegions = regionService.createRegion();
-        List<LookAroundRegionDto> searchRegions = regionService.createRegion();
+        List<LookAroundRegionDto> homeRegions = regionService.createLookAroundRegionDto();
+        List<LookAroundRegionDto> searchRegions = regionService.createLookAroundRegionDto();
 
         // then
         assertThat(homeRegions.size()).isEqualTo(8);
