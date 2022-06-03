@@ -24,9 +24,9 @@ public class UserReservationDto {
         this.checkoutTime = reservation.getCheckoutTime();
         this.accommodationAddress = reservation.getAccommodation().getAccommodationAddress();
         this.accommodationName = reservation.getAccommodation().getName();
-        this.nAdult = reservation.getNAdult();
-        this.nChild = reservation.getNChild();
-        this.nInfant = reservation.getNInfant();
+        this.nAdult = reservation.getAdultCount();
+        this.nChild = reservation.getChildCount();
+        this.nInfant = reservation.getInfantCount();
         this.totalAmountOfReservation = reservation.getReservationFee().getTotalAmountOfReservation();
         this.totalGuest = getNAdult() + getNChild() + getNInfant();
     }

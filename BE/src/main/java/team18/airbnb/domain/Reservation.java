@@ -26,13 +26,13 @@ public class Reservation {
     private LocalDateTime checkoutTime;
 
     @Column(nullable = false)
-    private int nAdult;
+    private int adultCount;
 
     @Column(nullable = false)
-    private int nChild;
+    private int childCount;
 
     @Column(nullable = false)
-    private int nInfant;
+    private int infantCount;
 
     @Column(nullable = false)
     private int maxPrice;
@@ -51,17 +51,17 @@ public class Reservation {
 
     public Reservation(LocalDateTime checkInTime,
                        LocalDateTime checkoutTime,
-                       int nAdult,
-                       int nChild,
+                       int adultCount,
+                       int childCount,
                        int nInfant,
                        Accommodation accommodation,
                        ReservationFee reservationFee) {
 
         this.checkInTime = checkInTime;
         this.checkoutTime = checkoutTime;
-        this.nAdult = nAdult;
-        this.nChild = nChild;
-        this.nInfant = nInfant;
+        this.adultCount = adultCount;
+        this.childCount = childCount;
+        this.infantCount = nInfant;
         this.reservationFee = reservationFee;
 
         if (accommodation != null) {

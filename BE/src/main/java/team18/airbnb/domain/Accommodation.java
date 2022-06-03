@@ -21,7 +21,7 @@ public class Accommodation {
     private Long id;
 
     private float startPoint;
-    private int nReview;
+    private int reviewCount;
     private String description;
     private String name;
 
@@ -39,13 +39,13 @@ public class Accommodation {
     @Embedded
     private AccommodationInfo accommodationInfo;
 
-    public Accommodation(float startPoint, int nReview, String description, String name,
+    public Accommodation(float startPoint, int reviewCount, String description, String name,
                          AccommodationAddress accommodationAddress,
                          AccommodationInfo accommodationInfo,
                          Region region) {
 
         this.startPoint = startPoint;
-        this.nReview = nReview;
+        this.reviewCount = reviewCount;
         this.description = description;
         this.name = name;
         this.accommodationAddress = accommodationAddress;
