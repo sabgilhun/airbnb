@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import com.example.todo.airbnb.R
+import com.example.todo.airbnb.presentation.main.components.Destinations.searchResult
 import com.example.todo.airbnb.presentation.reservation.components.ReservationScreen
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.date.components.DateScreen
@@ -21,7 +22,7 @@ import com.example.todo.airbnb.presentation.search.fare.components.FareScreen
 import com.example.todo.airbnb.presentation.search.main.SearchScreen
 import com.example.todo.airbnb.presentation.search.personnel.components.PersonnelScreen
 import com.example.todo.airbnb.presentation.search.searchmap.SearchMapScreen
-import com.example.todo.airbnb.presentation.search.searchresult.SearchResultScreen
+import com.example.todo.airbnb.presentation.search.searchresult.components.SearchResultScreen
 import com.example.todo.airbnb.presentation.search.serachcondition.SearchConditionScreen
 import com.example.todo.airbnb.presentation.wishlist.components.WishListScreen
 import com.example.todo.airbnb.ui.theme.Gray
@@ -67,9 +68,18 @@ fun BottomBar(
                 alwaysShowLabel = true,
                 selected = (currentRoute == item.route) || selectNavigation(currentRoute, item),
                 onClick = {
-                    navController.navigate(item.route) {
-                        launchSingleTop = true
-                        restoreState = true
+                    val backStackEntry = navController.previousBackStackEntry
+                    val route = backStackEntry?.destination?.route
+                    if (item.route == "검색" && route == searchResult) {
+                        navController.navigate(route ?: item.route) {
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    } else {
+                        navController.navigate(item.route) {
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 }
             )
