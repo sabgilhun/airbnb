@@ -56,8 +56,9 @@ private fun MakeColumn(
     viewModel: SearchViewModel,
     navController: NavController,
 ) {
-    Column(modifier = Modifier
-        .padding(end = 16.dp)
+    Column(
+        modifier = Modifier
+            .padding(end = 16.dp)
     ) {
         if (index % 2 == 0) {
             Row(

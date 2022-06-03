@@ -1,6 +1,5 @@
 package com.example.todo.airbnb.presentation.search.date.components
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,7 +20,6 @@ import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.components.common.BottomScreen
 import com.example.todo.airbnb.presentation.search.date.DateViewModel
 import com.example.todo.airbnb.ui.theme.Gray
-import java.time.LocalDate
 
 @Composable
 fun DateScreen(navController: NavController, viewModel: SearchViewModel) {
@@ -115,8 +113,8 @@ fun CalendarTopAppBar(
                             if (to.month.monthNumber in (1..9)) "0${to.month.monthNumber}" else "${to.month.monthNumber}"
                         val toDay = if (to.day in (1..9)) "0${to.day}" else "${to.day}"
 
-                        val checkIn = LocalDate.parse("${from.month.year}-${fromMonth}-${fromDay}")
-                        val checkOut = LocalDate.parse("${to.month.year}-${toMonth}-${toDay}")
+                        val checkIn = "${from.month.year}-${fromMonth}-${fromDay}"
+                        val checkOut = "${to.month.year}-${toMonth}-${toDay}"
 
                         if (split.size > 1) viewModel.addReservation(
                             reservation?.copy(checkIn = checkIn, checkOut = checkOut) ?: Search()
