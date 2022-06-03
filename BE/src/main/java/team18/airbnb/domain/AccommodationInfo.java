@@ -2,7 +2,10 @@ package team18.airbnb.domain;
 
 import javax.persistence.*;
 
+import lombok.Getter;
+
 @Embeddable
+@Getter
 public class AccommodationInfo {
 
     private int bedCount;

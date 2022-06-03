@@ -24,6 +24,7 @@ public class Accommodation {
     private int reviewCount;
     private String description;
     private String name;
+    private String mainImgUrl;
 
     @JsonManagedReference
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "accommodation")
@@ -39,7 +40,7 @@ public class Accommodation {
     @Embedded
     private AccommodationInfo accommodationInfo;
 
-    public Accommodation(float startPoint, int reviewCount, String description, String name,
+    public Accommodation(float startPoint, int reviewCount, String description, String name, String mainImgUrl,
                          AccommodationAddress accommodationAddress,
                          AccommodationInfo accommodationInfo,
                          Region region) {
@@ -48,6 +49,7 @@ public class Accommodation {
         this.reviewCount = reviewCount;
         this.description = description;
         this.name = name;
+        this.mainImgUrl = mainImgUrl;
         this.accommodationAddress = accommodationAddress;
         this.accommodationInfo = accommodationInfo;
 
