@@ -18,8 +18,8 @@ import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.date.components.DateScreen
 import com.example.todo.airbnb.presentation.search.detail.DetailScreen
 import com.example.todo.airbnb.presentation.search.fare.components.FareScreen
-import com.example.todo.airbnb.presentation.search.personnel.components.PersonnelScreen
 import com.example.todo.airbnb.presentation.search.main.SearchScreen
+import com.example.todo.airbnb.presentation.search.personnel.components.PersonnelScreen
 import com.example.todo.airbnb.presentation.search.searchmap.SearchMapScreen
 import com.example.todo.airbnb.presentation.search.searchresult.SearchResultScreen
 import com.example.todo.airbnb.presentation.search.serachcondition.SearchConditionScreen
@@ -112,7 +112,12 @@ private fun NavGraphBuilder.airbnbNavGraph(
     composable(route = Destinations.personnel) {
         PersonnelScreen(navController = navController, viewModel)
     }
-    composable(route = Destinations.searchResult) { SearchResultScreen(navController = navController, viewModel) }
+    composable(route = Destinations.searchResult) {
+        SearchResultScreen(
+            navController = navController,
+            viewModel
+        )
+    }
     composable(route = Destinations.searchMap) { SearchMapScreen(navController = navController) }
     composable(route = Destinations.searchCondition) { SearchConditionScreen(navController = navController) }
     composable(route = Destinations.detail) { DetailScreen(navController = navController) }
