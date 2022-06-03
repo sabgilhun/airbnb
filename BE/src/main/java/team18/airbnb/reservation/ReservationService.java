@@ -14,8 +14,8 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
-    public List<Reservation> findByUsername(String username) {
-        return reservationRepository.findByUsername(username);
+    public List<Reservation> findByUsername() {
+        return reservationRepository.findByUsername();
     }
 
     public List<UserReservationDto> createReservations(List<Reservation> findReservationsByUsername) {

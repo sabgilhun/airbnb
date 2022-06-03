@@ -9,18 +9,26 @@ import java.time.LocalDateTime;
 @Getter
 public class UserReservationDto {
 
-    private final Reservation reservation;
     private final LocalDateTime checkInTime;
     private final LocalDateTime checkoutTime;
     private final AccommodationAddress accommodationAddress;
     private final String accommodationName;
+    private final int nAdult;
+    private final int nChild;
+    private final int nInfant;
+    private final int totalAmountOfReservation;
+    private final int totalGuest;
 
     public UserReservationDto(Reservation reservation) {
-
-        this.reservation = reservation;
         this.checkInTime = reservation.getCheckInTime();
         this.checkoutTime = reservation.getCheckoutTime();
         this.accommodationAddress = reservation.getAccommodation().getAccommodationAddress();
         this.accommodationName = reservation.getAccommodation().getName();
+        this.nAdult = reservation.getNAdult();
+        this.nChild = reservation.getNChild();
+        this.nInfant = reservation.getNInfant();
+        this.totalAmountOfReservation = reservation.getReservationFee().getTotalAmountOfReservation();
+        this.totalGuest = getNAdult() + getNChild() + getNInfant();
     }
 }
+

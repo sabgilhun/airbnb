@@ -1,11 +1,14 @@
 package team18.airbnb.domain;
 
+import lombok.Getter;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
+
+@Getter
 public class AccommodationAddress {
 
-    // 시, 군, 구, 동, 읍 순
     private String si;
     private String gun;
     private String gu;
