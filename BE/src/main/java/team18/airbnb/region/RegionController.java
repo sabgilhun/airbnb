@@ -1,13 +1,12 @@
-package team18.airbnb.home;
+package team18.airbnb.region;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team18.airbnb.generalDto.LookAroundRegionDto;
-import team18.airbnb.home.dto.AccommodationByConceptDto;
+import team18.airbnb.region.dto.AccommodationByConceptDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,15 +15,15 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class HomeController {
+public class RegionController {
 
-    private final HomeService homeService;
+    private final RegionService regionService;
 
     @GetMapping("/main")
     public ResponseEntity<Map<String, Object>> home() {
 
-        List<AccommodationByConceptDto> accommodationByConcepts = homeService.createAccommodationByConcept();
-        List<LookAroundRegionDto> regions = homeService.createRegion();
+        List<AccommodationByConceptDto> accommodationByConcepts = regionService.createAccommodationByConcept();
+        List<LookAroundRegionDto> regions = regionService.createRegion();
 
         Map<String, Object> homeData = new HashMap<>();
         homeData.put("Accommodation" ,accommodationByConcepts);

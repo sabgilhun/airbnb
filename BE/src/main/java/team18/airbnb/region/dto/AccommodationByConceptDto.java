@@ -1,4 +1,4 @@
-package team18.airbnb.home.dto;
+package team18.airbnb.region.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

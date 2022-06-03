@@ -1,8 +1,8 @@
-package team18.airbnb.home;
+package team18.airbnb.region;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import team18.airbnb.domain.Region;
 
-public interface HomeRepository extends JpaRepository<Region, Long> {
+public interface RegionRepository extends JpaRepository<Region, Long> {
 }
