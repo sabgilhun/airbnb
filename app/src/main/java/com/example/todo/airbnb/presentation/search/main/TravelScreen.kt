@@ -1,6 +1,7 @@
 package com.example.todo.airbnb.presentation.search.main
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -14,13 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.example.todo.airbnb.common.components.HandleImageResult
 import com.example.todo.airbnb.data.Travel
+import com.example.todo.airbnb.domain.model.Search
+import com.example.todo.airbnb.presentation.main.components.Destinations
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 
 @Composable
-fun TravelScreen(viewModel: SearchViewModel) {
+fun TravelScreen(viewModel: SearchViewModel, navController: NavController) {
     val scrollState = rememberLazyListState()
     val travelLocations = viewModel.travelLocation.collectAsState().value
 
@@ -38,7 +42,7 @@ fun TravelScreen(viewModel: SearchViewModel) {
 
         LazyRow(state = scrollState) {
             itemsIndexed(travelLocations) { index, location ->
-                MakeColumn(index, location, travelLocations)
+                MakeColumn(index, location, travelLocations, viewModel, navController)
             }
         }
     }
@@ -49,12 +53,26 @@ private fun MakeColumn(
     index: Int,
     location: Travel,
     travelLocations: List<Travel>,
+    viewModel: SearchViewModel,
+    navController: NavController,
 ) {
-    Column(modifier = Modifier.padding(end = 16.dp)) {
+    Column(modifier = Modifier
+        .padding(end = 16.dp)
+    ) {
         if (index % 2 == 0) {
-            Row { MakeItem(location) }
+            Row(
+                modifier = Modifier.clickable {
+                    viewModel.addReservation(Search(location = location.name))
+                    navController.navigate(Destinations.calendar)
+                }
+            ) { MakeItem(location) }
             if (index + 1 < travelLocations.size) {
-                Row { MakeItem(travelLocations[index + 1]) }
+                Row(
+                    modifier = Modifier.clickable {
+                        viewModel.addReservation(Search(location = location.name))
+                        navController.navigate(Destinations.calendar)
+                    }
+                ) { MakeItem(travelLocations[index + 1]) }
             }
         }
     }
@@ -85,17 +103,18 @@ fun MakeItem(location: Travel) {
 
 @Composable
 private fun LoadImage(travel: Travel) {
-    val painter = rememberImagePainter(
-        data = travel.imageURL
-    )
-    Image(
-        painter = painter,
-        contentDescription = "여행지 이미지",
-        modifier = Modifier
-            .clip(RoundedCornerShape(10.dp))
-            .width(70.dp)
-            .height(70.dp),
-        contentScale = ContentScale.FillBounds
-    )
-    HandleImageResult(painterState = painter.state)
+    val painter = rememberImagePainter(data = travel.imageURL)
+    if (travel.imageURL == null) {
+        HandleImageResult(painterState = painter.state)
+    } else {
+        Image(
+            painter = painter,
+            contentDescription = "여행지 이미지",
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .width(70.dp)
+                .height(70.dp),
+            contentScale = ContentScale.FillBounds
+        )
+    }
 }

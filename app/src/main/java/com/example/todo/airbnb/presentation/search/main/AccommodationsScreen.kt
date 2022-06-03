@@ -55,18 +55,19 @@ fun AccommodationsScreen(viewModel: SearchViewModel) {
 }
 
 @Composable
-private fun LoadImage(imgUrl: String) {
-    val painter = rememberImagePainter(
-        data = imgUrl
-    )
-    Image(
-        painter = painter,
-        contentDescription = "여행지 이미지",
-        modifier = Modifier
-            .clip(RoundedCornerShape(10.dp))
-            .width(242.dp)
-            .height(294.dp),
-        contentScale = ContentScale.FillBounds
-    )
-    HandleImageResult(painterState = painter.state)
+private fun LoadImage(imgUrl: String?) {
+    val painter = rememberImagePainter(data = imgUrl)
+    if (imgUrl == null) {
+        HandleImageResult(painterState = painter.state)
+    } else {
+        Image(
+            painter = painter,
+            contentDescription = "여행지 이미지",
+            modifier = Modifier
+                .clip(RoundedCornerShape(10.dp))
+                .width(242.dp)
+                .height(294.dp),
+            contentScale = ContentScale.FillBounds
+        )
+    }
 }
