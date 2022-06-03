@@ -1,7 +1,5 @@
 package com.example.todo.airbnb.presentation.main.components
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
@@ -9,7 +7,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 
-@RequiresApi(Build.VERSION_CODES.O)
 @ExperimentalMaterialApi
 @Composable
 fun MainScreen(viewModel: SearchViewModel) {

@@ -1,6 +1,5 @@
 package com.example.todo.airbnb.presentation.search.personnel.components
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -25,7 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.todo.airbnb.R
+import com.example.todo.airbnb.common.components.ToastMessage
 import com.example.todo.airbnb.domain.model.Personnel
+import com.example.todo.airbnb.domain.model.Search
 import com.example.todo.airbnb.presentation.main.components.Destinations
 import com.example.todo.airbnb.presentation.search.SearchViewModel
 import com.example.todo.airbnb.presentation.search.components.common.BottomScreen
@@ -43,8 +44,7 @@ fun PersonnelScreen(
     viewModel.updatePersonnelText(personnel)
 
     if (adultPersonnelText == 0 && ((childPersonnelText >= 1) || (babyPersonnelText >= 1))) {
-        Toast.makeText(LocalContext.current, "유아 및 어린이는 성인과 함께 동반하셔야 됩니다.", Toast.LENGTH_SHORT)
-            .show()
+        ToastMessage(LocalContext.current, " 유아 및 어린이는 성인과 함께 동반하셔야 됩니다.")
         adultPersonnelText++
     }
 
@@ -55,7 +55,7 @@ fun PersonnelScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-                PersonnelTopAppBar(navController, viewModel.personnel.value)
+                PersonnelTopAppBar(navController, viewModel.personnel.value, viewModel)
                 TotalPersonnelText(viewModel.personnel.value)
             }
         },
@@ -106,7 +106,8 @@ fun PersonnelScreen(
 @Composable
 private fun PersonnelTopAppBar(
     navController: NavController,
-    personnel: Personnel
+    personnel: Personnel,
+    viewModel: SearchViewModel
 ) {
     Column(
         modifier = Modifier
@@ -129,7 +130,15 @@ private fun PersonnelTopAppBar(
                 )
             }
             IconButton(
-                onClick = { navController.navigate(Destinations.searchResult) },
+
+                onClick = {
+                    val reservation = viewModel.search.value
+                    val priceReservation = reservation?.copy(
+                        guest = personnel
+                    ) ?: Search()
+                    viewModel.addReservation(priceReservation)
+                    navController.navigate(Destinations.searchResult)
+                },
                 enabled = checkButtonEnabled(personnel)
             ) {
                 Icon(

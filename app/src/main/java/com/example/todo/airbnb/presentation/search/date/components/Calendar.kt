@@ -13,7 +13,10 @@ import androidx.compose.ui.semantics.*
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.example.todo.airbnb.R
-import com.example.todo.airbnb.data.datasource.CalendarYear
+import com.example.todo.airbnb.data.model.date.CalendarDay
+import com.example.todo.airbnb.data.model.date.CalendarMonth
+import com.example.todo.airbnb.data.model.date.CalendarYear
+import com.example.todo.airbnb.data.model.date.DayOfWeek
 import com.example.todo.airbnb.ui.theme.Circle
 import com.example.todo.airbnb.ui.theme.SemiRect
 
@@ -23,7 +26,6 @@ typealias CalendarWeek = List<CalendarDay>
 fun Calendar(
     calendarYear: CalendarYear,
     onDayClicked: (CalendarDay, CalendarMonth) -> Unit,
-    modifier: Modifier = Modifier,
 ) {
     Column {
         LazyColumn {
@@ -117,7 +119,6 @@ private fun Day(
                 modifier = Modifier
                     .fillMaxSize()
                     .wrapContentSize(Alignment.Center)
-                    // Parent will handle semantics
                     .clearAndSetSemantics {},
                 text = day.value,
                 style = MaterialTheme.typography.body1.copy(color = Color.Black)

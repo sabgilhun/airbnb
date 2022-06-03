@@ -1,4 +1,4 @@
-package com.example.todo.airbnb.presentation.main.components
+package com.example.todo.airbnb.presentation.search.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.example.todo.airbnb.presentation.search.main.SearchWidgetState
 import com.example.todo.airbnb.ui.theme.Gray
 
 @Composable
