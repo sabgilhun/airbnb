@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import team18.airbnb.generalDto.LookAroundRegionDto;
 import team18.airbnb.region.dto.AccommodationByConceptDto;
+import team18.airbnb.region.dto.HomeLayoutDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,15 +21,13 @@ public class RegionController {
     private final RegionService regionService;
 
     @GetMapping("/main")
-    public ResponseEntity<Map<String, Object>> home() {
+    public ResponseEntity<HomeLayoutDto> home() {
 
-        List<AccommodationByConceptDto> accommodationByConcepts = regionService.createAccommodationByConceptDto();
-        List<LookAroundRegionDto> regions = regionService.createLookAroundRegionDto();
+        List<AccommodationByConceptDto> accommodationByConceptDtos = regionService.createAccommodationByConceptDto();
+        List<LookAroundRegionDto> lookAroundRegionDtos = regionService.createLookAroundRegionDto();
 
-        Map<String, Object> homeData = new HashMap<>();
-        homeData.put("Accommodation" ,accommodationByConcepts);
-        homeData.put("Region" ,regions);
+        HomeLayoutDto homeLayoutDto = new HomeLayoutDto(accommodationByConceptDtos, lookAroundRegionDtos);
 
-        return ResponseEntity.ok(homeData);
+        return ResponseEntity.ok(homeLayoutDto);
     }
 }
